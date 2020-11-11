@@ -1,0 +1,33 @@
+<div class="container p-4">
+    <div class="col-md-4 mx-auto">
+        <h1 class="mx-auto p-4">  Disponibles </h1>
+    </div>
+    <div class="row">
+        {{#each links}}
+            <div class="col-md-3">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <a href="/links/ingresosCarro/{{id}}">
+                            <h3 class="card-title text-uppercase">
+                                {{ title }}
+                            </h3>
+                        </a>
+                        <p class="m-2"> {{ description }}</p>
+                        <p>{{timeago created_at}}</p>
+                        
+                        <a href="/links/formularioRenta/{{id}}" class="btn btn-danger m-1" > Rentar </a>
+                        <a href="/links/edit/{{id}}" class="btn btn-secondary m-1">Edit</a>
+                        
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p> No hay carros aun </p>
+                    <a href="/links/add"> Agregar un carro </a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

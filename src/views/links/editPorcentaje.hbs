@@ -1,0 +1,41 @@
+<div class="container p-4">
+    <div class="mx-auto text-center">
+        <h1 > Agregar gasto </h1>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/links/editPorcentaje/{{link.id_porcentaje}}" method="POST">
+                        <div class="form-group">
+                            <input type="text" value="{{link2.id}}" class="form-control" name="id" placeholder="Title" readonly>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" value="{{link2.title}}" class="form-control" name="title" placeholder="Title" readonly>
+                        </div>
+                        <div class="form-group">
+                            <input type="url" value="{{link2.url}} " name="url" class="form-control" placeholder="URL" readonly>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion" readonly>{{link2.description}}</textarea>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <p> Datos del porcentaje </p> 
+                        <div class="form-group">
+                            <input type="text"  class="form-control" value="{{link.descripcion}}" name="descripcion" placeholder="Descripcion porcentaje" autofocus required>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" value="{{link.valor}}" name="valor" placeholder="Valor"  required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container p-4">
+    <div class="mx-auto text-center">
+        <h1 > Formulario renta </h1>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            
+            <div class="card">
+                <div class="card-body">
+                    <form action="/links/formularioRenta/{{link.id}}" method="POST">
+                        <div class="form-group">
+                            <input type="text" value="{{link.title}}" class="form-control" name="title" placeholder="Title" readonly>
+                        </div>
+                        <div class="form-group">
+                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL" readonly>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion" readonly>{{link.description}}</textarea>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <p>Datos del usuario </p> 
+                        <div class="form-group">
+                            <input type="text"  class="form-control" name="nombre" placeholder="Nombre Completo" autofocus required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text"  class="form-control" name="cc" placeholder="C.C." required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text"  class="form-control" name="telefono" placeholder="Telefono" required> 
+                        </div>
+                        <div class="form-group">
+                            <p > Fecha de inicio:<input type="date" name="fechaInicio" class="form-control" required> </p>
+                        </div>
+                        <div class="form-group">
+                            <p >  Fecha de fin: <input type="date" name="fechaFin" class="form-control" required> </p>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="precio" placeholder="Precio total" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
