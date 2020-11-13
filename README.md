@@ -86,4 +86,4 @@ Si te quedo la inquietud o no te funciona la ejecución del proyecto, puedes esc
 
 
 ---
-⌨️ con ❤️ por [JGaviria0](https://github.com/JGaviria0) :tw-2660:
+⌨️ con ❤️ por [JGaviria0](https://github.com/JGaviria0)
