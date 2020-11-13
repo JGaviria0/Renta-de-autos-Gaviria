@@ -88,8 +88,8 @@ Da un ejemplo
 
 Si te quedo la inquietud o no te funciona la ejecución del proyecto, puedes escribirme a mi correo personal, o a mi instagram. 
 
-`:fa-instagram:`: <https://www.instagram.com/jgaviria0/>
-`:fa-envelope:`: <j.gaviria@utp.edu.co>
+<https://www.instagram.com/jgaviria0/>
+<j.gaviria@utp.edu.co>
 
 
 
