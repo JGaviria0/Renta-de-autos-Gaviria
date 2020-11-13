@@ -76,7 +76,7 @@ Recordemos que 3000 es el puerto donde está corriendo la aplicación.
 
 ## Justo despues de abrir la aplicación
 
-Debemos crear un usurio el cual tiene todos los permisos, la unica condición es que el *Username* sea **root** y la contraseña y el nombre pueden ser los que quieran. 
+Debemos crear un usuario el cual tiene todos los permisos, la única condición es que el *Username* sea **root** y la contraseña y el nombre pueden ser los que quieran. 
 
 ```
 Username: root
