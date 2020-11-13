@@ -3,6 +3,7 @@
 Este proyecto fue construido para la materia de base de datos del profesor **Carlos Alberto Ocampo Sepúlveda**, en la cual se creó una aplicación para la renta de autos, la cual además del manejo *MySQL* como motor de base de datos, también utiliza la tecnología de *Nodejs*, y otros módulos que mejoran la seguridad y la experiencia al manejo de la aplicación.
 
 Esta aplicación fue construida gracias al siguiente video de YouTube:
+
 `FAZT` : <https://youtu.be/qJ5R9WTW0_E?t=1>
 
 **¡Mucho ❤️ Para Fazt!**
