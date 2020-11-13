@@ -2,6 +2,11 @@
 
 Este proyecto fue construido para la materia de base de datos del profesor **Carlos Alberto Ocampo Sepúlveda**, en la cual se creó una aplicación para la renta de autos, la cual además del manejo *MySQL* como motor de base de datos, también utiliza la tecnología de *Nodejs*, y otros módulos que mejoran la seguridad y la experiencia al manejo de la aplicación.
 
+Esta aplicación fue construida gracias al siguiente video de YouTube:
+`FAZT` : <https://youtu.be/qJ5R9WTW0_E?t=1>
+
+**¡Mucho ❤️ Para Fazt!**
+
 ------------
 
 ### Pre-requisitos 📋
@@ -33,11 +38,13 @@ Procedemos a darle en el botón de administrar, y nos enviara a un localhost en 
 
 [![importar.png](https://i.postimg.cc/y8dyDyDM/importar.png)](https://postimg.cc/qzP3YnXw)
 
-veremos que nos pide seleccionar una archivo, seleccionamos el que esta en el proyecto, dentro de la carpeta **database**, el archivo **db.sql**.
+Veremos que nos pide seleccionar una archivo, seleccionamos el que esta en el proyecto, dentro de la carpeta **database**, el archivo **db.sql**.
 
 [![tempsnip2.png](https://i.postimg.cc/gkv3rBct/tempsnip2.png)](https://postimg.cc/9rQDnb7y)
 
 Solo resta darle continuar.
+
+------------
 
 ### Instalación de los módulos  🔧
 
@@ -48,6 +55,7 @@ npm i
 ```
 Esto instalara todos los móulos necesarios. 
 
+------------
 
 ## Ejecución ⚙️ 
 
@@ -63,6 +71,7 @@ localhost:3000
 ```
 Recordemos que 3000 es el puerto donde está corriendo la aplicación.
 
+------------
 
 ### Analice las pruebas end-to-end 🔩
 
@@ -72,6 +81,7 @@ _Explica que verifican estas pruebas y por qué_
 Da un ejemplo
 ```
 
+------------
 
 ## Dudas
 
