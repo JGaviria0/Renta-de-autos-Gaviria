@@ -2,7 +2,6 @@ CREATE DATABASE dabase_links;
 
 USE dabase_links; 
 
---Users Table
 CREATE TABLE users(
     id INT(11) NOT NULL,
     username VARCHAR(16) NOT NULL, 
@@ -18,7 +17,7 @@ ALTER TABLE users
 
 DESCRIBE users; 
 
---Links Table
+
 CREATE TABLE links (
     id INT(11) NOT NULL,
     title VARCHAR(150) NOT NULL,
@@ -40,7 +39,7 @@ DESCRIBE links;
 ALTER TABLE links
   ADD estado VARCHAR(50) NOT NULL DEFAULT 'Disponible';
 
---Carros rentados
+
 CREATE TABLE rentados (
     id INT(11) NOT NULL,
     title VARCHAR(150) NOT NULL,
@@ -51,7 +50,7 @@ CREATE TABLE rentados (
     telefono VARCHAR(11) NOT NULL,
     fechaInicio date NOT NULL,
     fechaFin date NOT NULL,
-    precio INT(10) NOT NULL
+    precio INT(10) NOT NULL 
 );
 
 ALTER TABLE rentados 
@@ -61,7 +60,7 @@ ALTER TABLE rentados
 ALTER TABLE rentados 
     ADD id_carro INT(11) NOT NULL; 
 
---Ingresos
+
 
 CREATE TABLE ingresos (
     id_ingreso INT(11) NOT NULL,
@@ -84,7 +83,7 @@ ALTER TABLE ingresos
 ALTER TABLE ingresos 
     MODIFY fecha timestamp NOT NULL DEFAULT current_timestamp;
 
---Mantenimiento 
+
 CREATE TABLE mantenimientos (
     id_mantenimiento INT(11) NOT NULL,
     id INT(11) NOT NULL,
@@ -97,7 +96,6 @@ ALTER TABLE mantenimientos
     ADD PRIMARY KEY(id_mantenimiento),
     MODIFY id_mantenimiento INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
---Historial
 
 CREATE TABLE historial (
     id_historial INT(11) NOT NULL,
@@ -117,7 +115,6 @@ ALTER TABLE historial
 ALTER TABLE historial
     ADD id_ingreso INT(11) NOT NULL;
 
---Porcentajes
 
 CREATE TABLE porcentaje (
     id_porcentaje INT(11) NOT NULL,
