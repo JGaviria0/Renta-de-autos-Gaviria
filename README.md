@@ -76,6 +76,20 @@ localhost:3000
 ```
 Recordemos que 3000 es el puerto donde está corriendo la aplicación.
 
+keys.js
+``` js
+
+module.exports = {
+
+    database: {
+        host: 'localhost',
+        user: 'root',
+        passport: '',
+        database: 'dabase_links'
+    }
+}
+```
+
 ------------
 
 ## Justo despues de abrir la aplicación
