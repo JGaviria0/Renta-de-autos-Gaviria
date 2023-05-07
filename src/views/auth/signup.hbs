@@ -1,24 +1,69 @@
 <div class="container p-4">
   <div class="row">
-    <div class="col-md-4 mx-auto">
+    <div class="col-md-6 mx-auto">
       <div class="card text-center">
         <div class="card-header">
-          <h3>SignUp</h3>
+          <h3 class="text-primary">Registro</h3>
         </div>
         <div class="card-body">
           <form action="/signup" method="POST">
-            <div class="form-group">
-              <input type="type" name="fullname" placeholder="Full Name" class="form-control" autofocus required>
+            <div class="row">
+              <div class="text-left col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Tipo de documento <span class="text-danger"> *</span></label>
+                  <select class="form-control" name="document-type" autofocus>
+                    <option></option>
+                    <option name="document-type" value="cedula de ciudadania">Cédula de ciudadania</option>
+                    <option name="document-type" value="cedula de extranjeria">Cédula de extranjería</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Nombres <span class="text-danger"> *</span></label>
+                  <input type="text" name="first-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fecha de nacimiento <span class="text-danger"> *</span></label>
+                  <input type="date" name="last-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Correo electrónico</label>
+                  <input type="email" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Usuario <span class="text-danger"> *</span></label>
+                  <input type="text" name="username" class="form-control" required>
+                </div>
+              </div>
+              <div class="text-left col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Documento de identidad <span class="text-danger"> *</span></label>
+                  <input type="text" name="identity-document" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Apellidos <span class="text-danger"> *</span></label>
+                  <input type="text" name="last-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Número de celular</label>
+                  <input type="number" name="cellphone-number" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tipo de usuario <span class="text-danger"> *</span></label>
+                  <select class="form-control" name="user-type">
+                    <option></option>
+                    <option name="user-type" value="propietario">Cliente</option>
+                    <option name="user-type" value="propietario">Propietario</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Contraseña <span class="text-danger"> *</span></label>
+                  <input type="text" name="password" minlength="8" class="form-control" required>
+                </div>
+              </div>
             </div>
             <div class="form-group">
-              <input type="text" name="username" placeholder="Username" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <input type="password" name="password" placeholder="Password" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-success btn-block">
-                SingIn
+              <button class="btn btn-primary">
+                Registrarse
               </button>
             </div>
           </form>

@@ -1,187 +1,203 @@
 <div class="container">
     <div class="col-md-4 mx-auto p-4">
-        <h1 class="text-center"> {{link3.title}} </h1> 
-        <h2 class="text-center"> {{link3.description}} </h2>
-        <a href="{{ link3.url }}" class="btn btn-warning btn btn-block" target="_blank" >Ubicación</a>
+        <h1 class="text-center text-primary"> {{link3.title}} </h1>
+        <h3 class="text-center text-primary"> {{link3.description}} </h2>
+            {{!-- <a href="{{ link3.url }}" class="btn btn-warning btn btn-block" target="_blank">Ubicación</a> --}}
     </div>
-
-    <table class="table table-striped">
-        
-            <tr class="table-warning">
-                <th style="width:30%"><h5>Ganancia del carro</h2> </td>
-                <th style="width:30%"></td>
-                <th style="width:30%"></td>
-                <th style="width:30%">${{totales.ganacia}}</td>
-            </tr>
-        
-    </table>
 
     <!--      ____________________Ingresos_________________             -->
 
     <table class="table table-striped mx-auto">
         <div class="row ">
             <div class="col-4">
-                <h2>Ingresos</h2>
+                <h3 class="text-dark">Ingresos</h2>
             </div>
         </div>
-        
+
         {{#if links}}
-        <thead class="thead-dark">
+        <thead class="thead-dark text-center">
             <tr>
-                <th style="width:30%"> Rentado a </th>
-                <th style="width:30%"> Fecha </th>
-                <th style="width:30%"> Valor </th>
-                <th style="width:30%"> Historial </th>
+                <th> Cliente </th>
+                <th> Fecha </th>
+                <th> Valor </th>
+                <th> Acción </th>
             </tr>
         </thead>
         {{/if}}
         {{#each links}}
-        <tbody>
+        <tbody class="text-center">
             <tr>
                 <td>{{nombre}}</td>
                 <td>{{timeago3 fechaInicio}}</td>
                 <td>${{precio}}</td>
                 <td>
-                    <a href="/links/detalles/{{id_historial}}" class="btn btn-info" > detalles </a>
+                    <a href="/links/detalles/{{id_historial}}" class="btn btn-secondary"> Detalles </a>
                 </td>
             </tr>
         </tbody>
-    
-    {{else}}
-    <div class="col-md-4 mx-auto">
-        <div class="card card-body text-center">
-            <p>No hay Ingresos para este carro</p>
+
+        {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>No hay ingresos para este carro</p>
+            </div>
         </div>
-    </div>
-    {{/each}}
-    {{#if links}}
-        <thead>
-            <tr class="table-success">
-                <td><h5>Total</h5> </td>
-                <td></td>
-                <td> <h6> ${{totales.ingreso}} </h6></td>
+        {{/each}}
+        {{#if links}}
+        <thead class="text-center">
+            <tr class="table-info">
                 <td>
-                    
+                    <h5>Total</h5>
+                </td>
+                <td></td>
+                <td>
+                    <h6> ${{totales.ingreso}} </h6>
+                </td>
+                <td>
+
                 </td>
             </tr>
         </thead>
-        </table>
+    </table>
     {{/if}}
     <br><br>
     <!--      ____________________Gastos_________________             -->
-    
+
     <table class="table table-striped">
         <div class="row">
             <div class="col-4 ">
-                <h2>Gastos</h2>
+                <h3 class="text-dark">Gastos</h2>
             </div>
-            <div class="col-3 ml-auto form-group">
-                <a href="/links/gastos/{{link3.id}}" class="btn btn-success btn-block" > Agregar Gastos </a>
+            <div class="col-2 ml-auto form-group">
+                <a href="/links/gastos/{{link3.id}}" class="btn btn-primary btn-block"> Agregar </a>
             </div>
         </div>
-            {{#if links2}}
-            <thead class="thead-dark">
-                <tr>
-                    <th style="width:30%"> Gasto </th>
-                    <th style="width:30%"> Fecha </th>
-                    <th style="width:30%"> Valor </th>
-                    <th style="width:30%"> Editar </th>
-                </tr>
-            </thead>
-            {{/if}}
-            {{#each links2}}
-            <tbody>
-                <tr>
-                    <td>{{ingreso}}</td>
-                    <td>{{timeago3 fecha}}</td>
-                    <td>${{valor}}</td>
-                    <td>
-                        <a href="/links/editGastos/{{id_ingreso}}" class="btn btn-info" > editar </a>
-                    </td>
-                </tr>
-            </tbody>
-    
+        {{#if links2}}
+        <thead class="thead-dark text-center">
+            <tr>
+                <th> Gasto </th>
+                <th> Fecha </th>
+                <th> Valor </th>
+                <th> Acción </th>
+            </tr>
+        </thead>
+        {{/if}}
+        {{#each links2}}
+        <tbody class="text-center">
+            <tr>
+                <td>{{ingreso}}</td>
+                <td>{{timeago3 fecha}}</td>
+                <td>${{valor}}</td>
+                <td>
+                    <a href="/links/editGastos/{{id_ingreso}}" class="btn btn-secondary "> Editar </a>
+                </td>
+            </tr>
+        </tbody>
+
         {{else}}
-            <div class="col-md-5 mx-auto p-4">
-                <div class="card card-body text-center">
-                    <p>No hay Gastos para este carro</p>
-                </div>
+        <div class="col-md-5 mx-auto p-4">
+            <div class="card card-body text-center">
+                <p>No hay gastos para este carro</p>
             </div>
-        
+        </div>
+
         {{/each}}
         {{#if links2}}
-        <thead>
-                <tr class="table-danger">
-                    <td><h5>Total</h5> </td>
-                    <td></td>
-                    <td> <h6> ${{totales.gasto}} </h6></td>
-                    <td>
-                       
-                    </td>
-                </tr>
+        <thead class="text-center">
+            <tr class="table-info">
+                <td>
+                    <h5>Total</h5>
+                </td>
+                <td></td>
+                <td>
+                    <h6> ${{totales.gasto}} </h6>
+                </td>
+                <td>
+
+                </td>
+            </tr>
         </thead>
-        </table>
+    </table>
     {{/if}}
     </table>
     <br><br>
     <!--      ____________________Mantenimientos_________________             -->
-    
+
     <table class="table table-striped">
         <div class="row">
             <div class="col-4">
-                <h2>Mantenimientos</h2>
+                <h3 class="text-dark">Mantenimientos</h2>
             </div>
-            <div class="col-3 ml-auto form-group">
-                <a href="/links/mantenimiento/{{link3.id}}" class="btn btn-success btn-block" > Agregar Mantenimiento </a>
+            <div class="col-2 ml-auto form-group">
+                <a href="/links/mantenimiento/{{link3.id}}" class="btn btn-primary btn-block"> Agregar </a>
             </div>
         </div>
         {{#if links4}}
-        <thead class="thead-dark">  
+        <thead class="thead-dark text-center">
             <tr>
-                <th style="width:30%"> Mantenimiento </th>
-                <th style="width:30%"> Km </th>
-                <th style="width:30%"> Fecha  </th>
-                <th style="width:30%"> Acción </th>
+                <th> Descripción </th>
+                <th> Valor </th>
+                <th> Fecha </th>
+                <th> Acción </th>
             </tr>
         </thead>
         {{/if}}
         {{#each links4}}
-        <tbody>
+        <tbody class="text-center">
             <tr>
                 <td>{{nombre}}</td>
                 <td>{{km}}</td>
                 <td>{{timeago3 fecha}}</td>
                 <td>
-                    <a href="/links/gastoRealizado/{{id_mantenimiento}}" class="btn btn-info">Ralizado</a>
+                    <a href="/links/gastoRealizado/{{id_mantenimiento}}" class="btn btn-secondary">Realizado</a>
                 </td>
             </tr>
         </tbody>
         {{else}}
         <div class="col-md-4 mx-auto">
             <div class="card card-body text-center">
-                <p>No hay Mantenimientos para este carro</p>
+                <p>No hay mantenimientos para este carro</p>
             </div>
         </div>
         {{/each}}
     </table>
     <br><br>
 
-    <!--      ____________________Porcentajes_________________             -->
-    
+    <div class="row ">
+        <div class="col-4">
+            <h3 class="text-dark">Utilidades</h3>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead class="text-center">
+            <tr class="table-danger">
+                <td>
+                    <h5>Total</h5>
+                </td>
+                <td>
+                    <h6> ${{totales.ganacia}} </h6>
+                </td>
+            </tr>
+        </thead>
+    </table>
+
+    {{!-- <!--      ____________________Porcentajes_________________             -->
+
     <table class="table table-striped">
         <div class="row">
             <div class="col-6">
                 <h2>Porcentajes de ganancias</h2>
             </div>
             <div class="col-3 ml-auto form-group">
-                <a href="/links/porcentaje/{{link3.id}}" class="btn btn-success btn-block" > Agregar porcentaje </a>
+                <a href="/links/porcentaje/{{link3.id}}" class="btn btn-success btn-block"> Agregar porcentaje </a>
             </div>
         </div>
         {{#if links5}}
-        <thead class="thead-dark">  
+        <thead class="thead-dark">
             <tr>
                 <th style="width:30%"> Porcentaje </th>
-                <th style="width:30%"> Valor  </th>
+                <th style="width:30%"> Valor </th>
                 <th style="width:30%"> Total </th>
                 <th style="width:30%"> Acción </th>
             </tr>
@@ -205,49 +221,49 @@
             </div>
         </div>
         {{/each}}
-    </table>
+    </table> --}}
 </div>
 
-<!-- Footer -->
+{{!-- <!-- Footer -->
 <footer class="page-footer font-small special-color-dark pt-4">
 
-  <!-- Footer Elements -->
-  <div class="container">
+    <!-- Footer Elements -->
+    <div class="container">
 
-    <!-- Social buttons -->
-    <ul class="list-unstyled list-inline text-center">
-      <li class="list-inline-item">
-        <a class="btn-floating btn-fb mx-1" href="https://www.facebook.com/jhonalex.gaviriatobon/">
-          <i class="fab fa-facebook-f"> </i>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-tw mx-1" href="https://twitter.com/JGaviria0">
-          <i class="fab fa-twitter"> </i>
-        </a>
-      </li>
-      
-      <li class="list-inline-item">
-        <a class="btn-floating btn-li mx-1" href="https://www.instagram.com/jgaviria0/">
-          <i class="fab fa-instagram"> </i>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-dribbble mx-1" href="https://github.com/JGaviria0">
-          <i class="fab fa-github"> </i>
-        </a>
-      </li>
-    </ul>
-    <!-- Social buttons -->
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1" href="https://www.facebook.com/jhonalex.gaviriatobon/">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1" href="https://twitter.com/JGaviria0">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
 
-  </div>
-  <!-- Footer Elements -->
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1" href="https://www.instagram.com/jgaviria0/">
+                    <i class="fab fa-instagram"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1" href="https://github.com/JGaviria0">
+                    <i class="fab fa-github"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-  </div>
-  <!-- Copyright -->
+    </div>
+    <!-- Footer Elements -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
 
 </footer>
-<!-- Footer -->
+<!-- Footer --> --}}

@@ -1,6 +1,6 @@
 <div class="container p-4">
     <div class="mx-auto text-center">
-        <h1 > Editar Gasto </h1>
+        <h2 class="text-primary"> Editar Gasto </h1>
     </div>
     <br>
     <div class="row">
@@ -8,33 +8,47 @@
             <div class="card">
                 <div class="card-body">
                     <form action="/links/editGastos/{{link.id_ingreso}}" method="POST">
+                        {{!-- <div class="form-group">
+                            <input type="number" value="{{link.id}}" class="form-control" name="id" placeholder="Title"
+                                readonly>
+                        </div> --}}
+                        <h6 class="text-center text-dark">Datos del vehículo</h6>
                         <div class="form-group">
-                            <input type="number" value="{{link.id}}" class="form-control" name="id" placeholder="Title" readonly>
+                            <label class="text-dark">Placa</label>
+                            <input type="text" value="{{link.title}}" class="form-control" name="title"
+                                placeholder="Title" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="text" value="{{link.title}}" class="form-control" name="title" placeholder="Title" readonly>
+                            <label class="text-dark">URL</label>
+                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL"
+                                readonly>
                         </div>
                         <div class="form-group">
-                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL" readonly>
+                            <label class="text-dark">Descripción</label>
+                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion"
+                                readonly>{{link.description}}</textarea>
                         </div>
-                        <div class="form-group">
-                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion" readonly>{{link.description}}</textarea>
-                        </div>
+
                         <div class="dropdown-divider"></div>
-                        <p>Datos del Gasto </p> 
+
+                        <h6 class="text-center text-dark">Datos del gasto</h6>
                         <div class="form-group">
-                            <input type="text"  class="form-control" value="{{link.ingreso}}" name="ingreso" placeholder="Descripcion Gasto" autofocus required>
+                            <label class="text-dark">Descripción<span class="text-danger"> *</span></label>
+                            <input type="text" class="form-control" value="{{link.ingreso}}" name="ingreso"
+                                placeholder="Descripcion Gasto" autofocus required>
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" value="{{link.valor}}" name="valor" placeholder="Valor" step="10" required>
+                            <label class="text-dark">Valor<span class="text-danger"> *</span></label>
+                            <input type="number" class="form-control" value="{{link.valor}}" name="valor"
+                                placeholder="Valor" step="10" required>
                         </div>
                         <div class="form-group">
-                            <p >  fecha <input type="date" value="{{timeago2 link.fecha}}" name="fecha" class="form-control" required> </p>
+                            <label class="text-dark">Fecha<span class="text-danger"> *</span></label>
+                            <input type="date" value="{{timeago2 link.fecha}}" name="fecha" class="form-control"
+                                required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success btn-block">
-                                Save
-                            </button>
+                            <button class="btn btn-primary btn-block">Actualizar</button>
                         </div>
                     </form>
                 </div>

@@ -4,9 +4,10 @@ const { deserializeUser } = require("passport");
 module.exports = {
 
     database: {
-        host: 'localhost',
-        user: 'root',
-        passport: '',
-        database: 'dabase_links'
+        host: 'bkxzwe248mikavhwbvof-mysql.services.clever-cloud.com',
+        user: 'ulzganj50gmrolay',
+        password: 'o2tWLvhA0WMELeuQikf3',
+        database: 'bkxzwe248mikavhwbvof'
     }
+
 }
