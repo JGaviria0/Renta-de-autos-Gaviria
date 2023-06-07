@@ -3,19 +3,25 @@ CREATE DATABASE dabase_links;
 USE dabase_links; 
 
 CREATE TABLE users(
-    id INT(11) NOT NULL,
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(16) NOT NULL, 
     password VARCHAR(60) NOT NULL,
-    fullname VARCHAR(100) NOT NULL
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    documentType VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    indentityDocument VARCHAR(100) NOT NULL,
+    phone INT(11) NOT NULL,
+    userType INT(2) NOT NULL
 );
 
-ALTER TABLE users 
-    ADD PRIMARY KEY(id); 
+-- ALTER TABLE users 
+--     ADD PRIMARY KEY(id); 
 
-ALTER TABLE users
-    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2; 
+-- ALTER TABLE users
+--     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2; 
 
-DESCRIBE users; 
+-- DESCRIBE users; 
 
 
 CREATE TABLE links (
@@ -25,11 +31,11 @@ CREATE TABLE links (
     description TEXT, 
     user_id INT(11),
     created_at timestamp NOT NULL DEFAULT current_timestamp,
-    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id),
+    ADD PRIMARY KEY (id)
 );
 
 ALTER TABLE links
-    ADD PRIMARY KEY (id); 
 
 ALTER TABLE links 
     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2; 

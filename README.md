@@ -22,6 +22,20 @@ Para poder ejecutar la aplicación necesitaremos dos aplicaciones muy importante
 
 `Nodejs` : <https://nodejs.org/es/>
 
+Tambien añadir estas variables de entorno.
+
+``` json
+module.exports = {
+
+    database: {
+        host: '',
+        user: '',
+        password : '',
+        database: ''
+    }
+}
+```
+
 ------------
 
 

@@ -4,16 +4,18 @@ const router = express.Router()
 const pool = require('../database')
 const { isLoggedIn, isSuperRoot } = require('../lib/auth');
 
-router.get('/add', isSuperRoot, (req, res) => {
+router.get('/add', isLoggedIn, (req, res) => {
     res.render('links/add')
 })
 
-router.post('/add', isSuperRoot, async (req, res) => {
-    const { title, url, description } = req.body
+router.post('/add', isLoggedIn, async (req, res) => {
+    console.log(req.user.id);
+    const { title, url, description } = req.body;
     const newLink = {
         title,
         url, 
-        description
+        description,
+        user_id : req.user.id
     }
     await pool.query('INSERT INTO links set ?', [newLink] )
     req.flash('success', 'Carro agregado exitosamente.')
@@ -52,15 +54,20 @@ router.post('/ingresosCarro/:id', isLoggedIn, async(req, res) => {
         description, 
         url
     }
-    //await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
+    await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
     req.flash('success', 'Datos de auto actualizados')
     res.redirect('/links')
 })
 
 router.get('/', isLoggedIn, async(req,res) => { 
     const Disponible = 'Disponible'
-    const links = await pool.query('SELECT * FROM links WHERE estado = ?', [Disponible])
-    res.render('links/list', { links })
+    if(req.user.username == 'root') {
+        const links = await pool.query('SELECT * FROM links WHERE estado = ?', [Disponible])
+        res.render('links/list', { links })
+    }else {
+        const links = await pool.query('SELECT * FROM links WHERE estado = ? AND user_id = ?', [Disponible, req.user.id])
+        res.render('links/list', { links })
+    }
 })
 
 router.get('/rentados', isLoggedIn, async(req,res) => { 
