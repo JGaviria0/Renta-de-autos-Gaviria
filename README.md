@@ -24,7 +24,7 @@ Para poder ejecutar la aplicación necesitaremos dos aplicaciones muy importante
 
 Tambien añadir estas variables de entorno.
 
-``` json
+``` js
 module.exports = {
 
     database: {
