@@ -1,6 +1,6 @@
 <div class="container p-4">
     <div class="mx-auto text-center">
-        <h1 > Agregar mantenimiento </h1>
+        <h2 class="text-primary"> Agregar Mantenimiento </h2>
     </div>
     <br>
     <div class="row">
@@ -8,30 +8,40 @@
             <div class="card">
                 <div class="card-body">
                     <form action="/links/mantenimiento/{{link.id}}" method="POST">
+                        <h6 class="text-center text-dark">Datos del vehículo</h6>
                         <div class="form-group">
-                            <input type="text" value="{{link.title}}" class="form-control" name="title" placeholder="Title" readonly>
+                            <label class="text-dark">Placa</label>
+                            <input type="text" value="{{link.title}}" class="form-control" name="title"
+                                placeholder="Title" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL" readonly>
+                            <label class="text-dark">URL</label>
+                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL"
+                                readonly>
                         </div>
                         <div class="form-group">
-                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion" readonly>{{link.description}}</textarea>
+                            <label class="text-dark">Descripción</label>
+                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion"
+                                readonly>{{link.description}}</textarea>
                         </div>
+
                         <div class="dropdown-divider"></div>
-                        <p>Datos del Mantenimiento </p> 
+
+                        <h6 class="text-center text-dark">Datos del mantenimiento</h6>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="nombre" placeholder="Descripcion Mantenimiento" autofocus required>
+                            <label class="text-dark">Descripción <span class="text-danger"> *</span></label>
+                            <input type="text" class="form-control" name="nombre" autofocus required>
                         </div>
                         <div class="form-group">
-                            <p >  fecha de cambio: <input type="date" name="fecha" class="form-control" required > </p>
+                            <label class="text-dark">Valor <span class="text-danger"> *</span></label>
+                            <input type="number" class="form-control" name="km" required>
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" name="km" placeholder="km requeridos"  required>
+                            <label class="text-dark">Fecha <span class="text-danger"> *</span></label>
+                            <input type="date" name="fecha" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success btn-block">
-                                Save
-                            </button>
+                            <button class="btn btn-primary btn-block">Agregar</button>
                         </div>
                     </form>
                 </div>

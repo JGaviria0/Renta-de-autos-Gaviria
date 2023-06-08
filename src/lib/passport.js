@@ -30,9 +30,16 @@ passport.use('local.signup', new LocalStrategy({
 }, async (req, username, password, done) => {
   const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
   if (rows.length <= 0) {
-    const { fullname } = req.body;
+    const { document_type, first_name, last_name, email, identity_document, cellphone_number, user_type, birth_date } = req.body;
     let newUser = {
-      fullname,
+      document_type, 
+      first_name, 
+      last_name, 
+      email, 
+      identity_document, 
+      cellphone_number, 
+      user_type,
+      birth_date,
       username,
       password
     }
