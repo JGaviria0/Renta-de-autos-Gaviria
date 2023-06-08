@@ -19,10 +19,10 @@ CREATE TABLE users(
 ALTER TABLE users 
     ADD birth_date timestamp NOT NULL;
 
-ALTER TABLE users
-    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2; 
+-- ALTER TABLE users
+--     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2; 
 
-DESCRIBE users; 
+-- DESCRIBE users; 
 
 CREATE TABLE links (
     id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -32,8 +32,14 @@ CREATE TABLE links (
     user_id INT(11),
     created_at timestamp NOT NULL DEFAULT current_timestamp,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id),
+
     estado VARCHAR(50) NOT NULL DEFAULT 'Disponible'
 );
+
+ALTER TABLE links
+
+ALTER TABLE links 
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2; 
 
 DESCRIBE links; 
 
