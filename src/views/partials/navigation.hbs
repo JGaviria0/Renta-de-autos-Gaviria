@@ -7,7 +7,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ml-auto">
-				{{#if user}}
+				{{#if user.isroot}}
 				<li class="nav-item active">
 					<a class="nav-link" href="/"> Pagos <span class="sr-only">(current)</span></a>
 				</li>
@@ -24,14 +24,24 @@
 					<a class="nav-link" href="/logout"> Salir <span class="sr-only">(current)</span></a>
 				</li>
 				{{else}}
-				<li class="nav-item active">
-					<a class="nav-link" href="/signin"> Iniciar Sesión <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item active">
-					<a class="nav-link" href="/signup"> Registrarse <span class="sr-only">(current)</span></a>
-				</li>
+					{{#if user.isowner}}
+					<li class="nav-item active">
+						<a class="nav-link" href="/signin"> Propietarios <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/signup"> Registrarse <span class="sr-only">(current)</span></a>
+					</li>
+					{{else}}
+					<li class="nav-item active">
+						<a class="nav-link" href="/signin"> Cliente <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/signup"> Registrarse <span class="sr-only">(current)</span></a>
+					</li>
+					{{/if}}
 				{{/if}}
 			</ul>
 		</div>
 	</div>
 </nav>
+

@@ -11,10 +11,22 @@ passport.use('local.signin', new LocalStrategy({
 }, async (req, username, password, done) => {
   const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
   if (rows.length > 0) {
-    const user = rows[0];
+    let user = rows[0];
+    console.log(user);
     const validPassword = await helpers.matchPassword(password, user.password)
+
+    if (username === 'root'){
+      console.log("si es root")
+      user.isroot = true; 
+      user.test = 'TEst';
+    }
+    if (user.user_type == 'propietario'){
+      user.isowner = true; 
+    }
+    console.log(user);
+    const user2 = user; 
     if (validPassword) {
-      done(null, user, req.flash('success', 'Welcome ' + user.username));
+      done(null, user2, req.flash('success', 'Welcome ' + user.first_name));
     } else {
       done(null, false, req.flash('message', 'Incorrect Password'));
     }
@@ -59,5 +71,12 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   const rows = await pool.query('SELECT * FROM users WHERE id = ?', [id]);
-  done(null, rows[0]);
+  let user = rows[0]
+  if (user.username === 'root'){
+    user.isroot = true; 
+  }
+  if (user.user_type == 'propietario'){
+    user.isowner = true; 
+  }
+  done(null, user);
 });

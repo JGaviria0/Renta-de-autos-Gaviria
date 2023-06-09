@@ -32,7 +32,6 @@ CREATE TABLE links (
     user_id INT(11),
     created_at timestamp NOT NULL DEFAULT current_timestamp,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id),
-
     estado VARCHAR(50) NOT NULL DEFAULT 'Disponible'
 );
 
