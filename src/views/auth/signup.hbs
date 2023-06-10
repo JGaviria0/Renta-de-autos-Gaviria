@@ -15,6 +15,7 @@
                     <option></option>
                     <option name="document_type" value="cedula de ciudadania">Cédula de ciudadania</option>
                     <option name="document_type" value="cedula de extranjeria">Cédula de extranjería</option>
+                    <option name="document_type" value="pasaporte">Pasaporte</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -26,7 +27,7 @@
                   <input type="date" name="birth_date" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Correo electrónico</label>
+                  <label class="form-label">Correo electrónico <span class="text-danger"> *</span></label>
                   <input type="email" name="email" class="form-control" required>
                 </div>
                 <div class="form-group">
@@ -44,14 +45,14 @@
                   <input type="text" name="last_name" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Número de celular</label>
+                  <label class="form-label">Número de celular <span class="text-danger"> *</span></label>
                   <input type="number" name="cellphone_number" class="form-control" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Tipo de usuario <span class="text-danger"> *</span></label>
                   <select class="form-control" name="user_type">
                     <option></option>
-                    <option name="user_type" value="propietario">Cliente</option>
+                    <option name="user_type" value="cliente">Cliente</option>
                     <option name="user_type" value="propietario">Propietario</option>
                   </select>
                 </div>

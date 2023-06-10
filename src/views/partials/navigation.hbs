@@ -24,24 +24,44 @@
 					<a class="nav-link" href="/logout"> Salir <span class="sr-only">(current)</span></a>
 				</li>
 				{{else}}
-					{{#if user.isowner}}
-					<li class="nav-item active">
-						<a class="nav-link" href="/signin"> Propietarios <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="/signup"> Registrarse <span class="sr-only">(current)</span></a>
-					</li>
-					{{else}}
-					<li class="nav-item active">
-						<a class="nav-link" href="/signin"> Cliente <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="/signup"> Registrarse <span class="sr-only">(current)</span></a>
-					</li>
-					{{/if}}
+				{{#if user.isowner}}
+				<li class="nav-item active">
+					<a class="nav-link" href="/links"> Vehículos <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/"> Perfil <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/logout"> Salir <span class="sr-only">(current)</span></a>
+				</li>
+				{{else}}
+				{{#if user.iscustomer}}
+				<li class="nav-item active">
+					<a class="nav-link" href="/"> Pagos <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/"> Reservas <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/links"> Vehículos <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/"> Perfil <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/logout"> Salir <span class="sr-only">(current)</span></a>
+				</li>
+				{{else}}
+				<li class="nav-item active">
+					<a class="nav-link" href="/signin"> Iniciar Sesión <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/signup"> Registrarse <span class="sr-only">(current)</span></a>
+				</li>
+				{{/if}}
+				{{/if}}
 				{{/if}}
 			</ul>
 		</div>
 	</div>
 </nav>
-
