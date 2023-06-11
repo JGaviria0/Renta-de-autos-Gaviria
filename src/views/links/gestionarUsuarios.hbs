@@ -1,0 +1,44 @@
+<div class="container p-5">
+  <div class="mx-auto text-center">
+    <h2 class="text-primary">Gestionar usuarios</h1>
+  </div>
+  <div class="p-5">
+    <table class="table table-striped mx-auto">
+      {{#if users}}
+      <thead class="thead-dark text-center">
+        <tr>
+          <th> Identificación </th>
+          <th> Nombres </th>
+          <th> Apellidos </th>
+          <th> Celular </th>
+          <th> Correo </th>
+          <th> Tipo </th>
+          <th> Acción </th>
+        </tr>
+      </thead>
+      {{/if}}
+      {{#each users}}
+      <tbody class="text-center">
+        <tr>
+          <td>{{identity_document}}</td>
+          <td>{{first_name}}</td>
+          <td>{{last_name}}</td>
+          <td>{{cellphone_number}}</td>
+          <td>{{email}}</td>
+          <td>{{user_type}}</td>
+          <td>
+            <a href="" class="btn btn-danger"> Deshabilitar </a>
+          </td>
+        </tr>
+      </tbody>
+
+      {{else}}
+      <div class="col-md-4 mx-auto">
+        <div class="card card-body text-center">
+          <p>No hay usuarios registrados</p>
+        </div>
+      </div>
+      {{/each}}
+    </table>
+  </div>
+</div>

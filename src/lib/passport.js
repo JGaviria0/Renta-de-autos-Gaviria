@@ -23,6 +23,9 @@ passport.use('local.signin', new LocalStrategy({
     if (user.user_type == 'propietario'){
       user.isowner = true; 
     }
+    if (user.user_type == 'cliente'){
+      user.iscustomer = true;
+    }
     console.log(user);
     const user2 = user; 
     if (validPassword) {
@@ -77,6 +80,9 @@ passport.deserializeUser(async (id, done) => {
   }
   if (user.user_type == 'propietario'){
     user.isowner = true; 
+  }
+  if (user.user_type == 'cliente'){
+    user.iscustomer = true;
   }
   done(null, user);
 });

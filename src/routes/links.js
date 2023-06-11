@@ -4,6 +4,32 @@ const router = express.Router()
 const pool = require('../database')
 const { isLoggedIn, isSuperRoot } = require('../lib/auth');
 
+router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
+    const user = await pool.query('SELECT * FROM users')
+    res.render('links/gestionarUsuarios',{users: user})
+})
+
+router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    const user = await pool.query('SELECT * FROM users WHERE id = ?', [id])
+    res.render('links/editarPerfil', { users: user[0] })
+})
+
+router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
+    const { id } = req.params
+    const {username, password, email, cellphone_number} = req.body
+    const updateProfile = {
+        username,
+        password,
+        email,
+        cellphone_number
+    }
+    await pool.query('UPDATE users set ? WHERE id = ?', [updateProfile, id])
+    req.flash('success', 'Su perfil ha sido actualizado correctamente')
+    res.redirect('/profile')
+})
+
+
 router.get('/add', isLoggedIn, (req, res) => {
     res.render('links/add')
 })
@@ -61,12 +87,17 @@ router.post('/ingresosCarro/:id', isLoggedIn, async(req, res) => {
 
 router.get('/', isLoggedIn, async(req,res) => { 
     const Disponible = 'Disponible'
-    if(req.user.username == 'root') {
+    if(req.user.username == 'root'){
         const links = await pool.query('SELECT * FROM links WHERE estado = ?', [Disponible])
         res.render('links/list', { links })
-    }else {
+    } 
+    else if (req.user.user_type == 'cliente') {
+        const links = await pool.query('SELECT * FROM links WHERE estado = ?', [Disponible])
+        res.render('links/listCustomer', { links })
+    }
+    else {
         const links = await pool.query('SELECT * FROM links WHERE estado = ? AND user_id = ?', [Disponible, req.user.id])
-        res.render('links/list', { links })
+        res.render('links/listOwner', { links })
     }
 })
 
@@ -86,13 +117,13 @@ router.get('/devuelto/:id', isSuperRoot, async (req, res) => {
 })
 
 
-router.get('/edit/:id', isSuperRoot, async (req, res) => {
+router.get('/edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params 
     const links = await pool.query('SELECT * FROM links WHERE id = ?', [id])
     res.render('links/edit', { link: links[0] })
 })
 
-router.post('/edit/:id', isSuperRoot, async(req, res) => {
+router.post('/edit/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
     const { title, description, url } = req.body
     const newLink = { 

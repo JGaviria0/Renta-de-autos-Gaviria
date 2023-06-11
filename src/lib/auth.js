@@ -20,7 +20,7 @@ module.exports = {
         if(theUser.username == 'root') {
             return next();
         }
-        req.flash('message', 'Usted no es Super Usuario')
+        req.flash('message', 'Usted no es un usuario administrador')
         return res.redirect('back');
     }
 

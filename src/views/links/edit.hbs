@@ -1,25 +1,55 @@
 <div class="container p-4">
     <div class="mx-auto text-center">
-        <h1 > Editar carro </h1>
+        <h2 class="text-primary">Editar vehículo</h1>
     </div>
     <br>
     <div class="row">
         <div class="col-md-4 mx-auto">
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-body">
                     <form action="/links/edit/{{link.id}}" method="POST">
-                        <div class="form-group">
-                            <input type="text" value="{{link.title}}" class="form-control" name="title" placeholder="Title" autofocus required>
+                        <div class="row">
+                            <div class="text-left col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Marca <span class="text-danger"> *</span></label>
+                                    <input type="text" name="brand" class="form-control" value={{link.id}} readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Placa <span class="text-danger"> *</span></label>
+                                    <input type="text" name="plate" class="form-control" value={{link.id}} readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Caja de cambios <span class="text-danger">
+                                            *</span></label>
+                                    <input type="text" name="gearbox" class="form-control" value={{link.id}} required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">URL Foto <span class="text-danger"> *</span></label>
+                                    <input type="text" name="url" class="form-control" value={{link.url}} required>
+                                </div>
+                            </div>
+                            <div class="text-left col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Modelo <span class="text-danger">
+                                            *</span></label>
+                                    <input type="text" name="model" class="form-control" value={{link.id}} readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Licencia tránsito <span class="text-danger">
+                                            *</span></label>
+                                    <input type="number" name="transit_license" class="form-control" value={{link.id}}
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Combustible <span class="text-danger">
+                                            *</span></label>
+                                    <input type="text" name="fuel" class="form-control" value={{link.id}} required>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion" required>{{link.description}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-success btn-block">
-                                Save
+                            <button class="btn btn-primary btn-block">
+                                Editar
                             </button>
                         </div>
                     </form>
