@@ -71,7 +71,7 @@ router.get('/ingresosCarro/:id', isLoggedIn, async(req, res) => {
     const naturaleza2 = "Gastos"
     const { id } = req.params
     const link = await pool.query('SELECT * FROM historial WHERE id = ?', [id])
-    const link2 = await pool.query('SELECT * FROM ingresos WHERE id = ? AND naturaleza = ?', [id, naturaleza2])
+    const link2 = await pool.query('SELECT * FROM ingresos WHERE id_car = ? AND naturaleza = ?', [id, naturaleza2])
     const link4 = await pool.query('SELECT * FROM mantenimientos WHERE id = ? ', [id])
     const link5 = await pool.query('SELECT * FROM porcentaje WHERE id = ? ', [id])
     const links = await pool.query('SELECT * FROM links WHERE id = ?', [id])
@@ -300,24 +300,21 @@ router.get('/gastos/:id', isSuperRoot, async (req, res) => {
     res.render('links/gastos', { link: links[0] })
 })
 
-router.post('/gastos/:id', isSuperRoot, async(req, res) => {
-    const Rentado = 'Rentado'
+router.post('/gastos/:id_car', isSuperRoot, async(req, res) => {
     const naturaleza = 'Gastos'
-    const { id } = req.params
-    const { title, url, description, ingreso, valor} = req.body
+    const { id_car } = req.params
+    const {ingreso, valor, fecha} = req.body
     const nuevoGasto = {
-        id,
-        title,
-        url,
-        description,
+        id_car,
         ingreso,
         valor,
-        naturaleza
+        naturaleza,
+        fecha
     }
     await pool.query('INSERT INTO ingresos set ?', [nuevoGasto] )
 
     req.flash('success', 'Gasto ingresado correctamente')
-    res.redirect('../ingresosCarro/' + id)
+    res.redirect('../ingresosCarro/' + id_car)
 })
 
 router.get('/gastoRealizado/:id_mantenimiento', isSuperRoot, async (req, res) => {
