@@ -4,9 +4,29 @@ const router = express.Router()
 const pool = require('../database')
 const { isLoggedIn, isSuperRoot } = require('../lib/auth');
 
-router.get('/gestionarUsuarios', isSuperRoot, async(req, res) => {
+router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
     const user = await pool.query('SELECT * FROM users')
     res.render('links/gestionarUsuarios',{users: user})
+})
+
+router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    const user = await pool.query('SELECT * FROM users WHERE id = ?', [id])
+    res.render('links/editarPerfil', { users: user[0] })
+})
+
+router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
+    const { id } = req.params
+    const {username, password, email, cellphone_number} = req.body
+    const updateProfile = {
+        username,
+        password,
+        email,
+        cellphone_number
+    }
+    await pool.query('UPDATE users set ? WHERE id = ?', [updateProfile, id])
+    req.flash('success', 'Su perfil ha sido actualizado correctamente')
+    res.redirect('/profile')
 })
 
 

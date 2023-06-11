@@ -1,0 +1,73 @@
+<div class="container p-5">
+  <div class="mx-auto text-center">
+    <h2 class="text-primary"> Editar Perfil </h1>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-5 mx-auto">
+      <div class="card border-primary">
+        <div class="card-body">
+          <form action="/links/editarPerfil/{{user.id}}" method="POST">
+            <div class="row">
+              <div class="text-left col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Tipo de documento <span class="text-danger"> *</span></label>
+                  <select class="form-control" name="document_type" value={{user.document_type}} readonly>
+                    <option>{{user.document_type}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Nombres <span class="text-danger"> *</span></label>
+                  <input type="text" name="first_name" class="form-control" value={{user.first_name}} readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Fecha de nacimiento <span class="text-danger"> *</span></label>
+                  <input type="date" name="birth_date" class="form-control" value={{user.birth_date}} readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Correo electrónico <span class="text-danger"> *</span></label>
+                  <input type="email" name="email" class="form-control" value={{user.email}} required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Usuario <span class="text-danger"> *</span></label>
+                  <input type="text" name="username" class="form-control" value={{user.username}} required>
+                </div>
+              </div>
+              <div class="text-left col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Documento identidad <span class="text-danger"> *</span></label>
+                  <input type="text" name="identity_document" class="form-control" value={{user.identity_document}}
+                    readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Apellidos <span class="text-danger"> *</span></label>
+                  <input type="text" name="last_name" class="form-control" value={{user.last_name}} readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Número de celular <span class="text-danger"> *</span></label>
+                  <input type="number" name="cellphone_number" class="form-control" value={{user.cellphone_number}}
+                    required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tipo de usuario <span class="text-danger"> *</span></label>
+                  <select class="form-control" name="user_type" value={{user.user_type}} readonly>
+                    <option>{{user.user_type}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Contraseña <span class="text-danger"> *</span></label>
+                  <input type="password" name="password" minlength="8" class="form-control" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block">
+                Editar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
