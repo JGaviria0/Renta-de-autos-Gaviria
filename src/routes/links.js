@@ -4,6 +4,12 @@ const router = express.Router()
 const pool = require('../database')
 const { isLoggedIn, isSuperRoot } = require('../lib/auth');
 
+router.get('/gestionarUsuarios', isSuperRoot, async(req, res) => {
+    const user = await pool.query('SELECT * FROM users')
+    res.render('links/gestionarUsuarios',{users: user})
+})
+
+
 router.get('/add', isLoggedIn, (req, res) => {
     res.render('links/add')
 })
