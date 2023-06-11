@@ -21,7 +21,11 @@
                                 <div class="form-group">
                                     <label class="form-label">Caja de cambios <span class="text-danger">
                                             *</span></label>
-                                    <input type="text" name="gearbox" class="form-control" required>
+                                    <select class="form-control" name="gearbox" required>
+                                        <option></option>
+                                        <option name="gearbox" value="Manual">Manual</option>
+                                        <option name="gearbox" value="Automatica">Automática</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">URL Foto <span class="text-danger"> *</span></label>
@@ -42,7 +46,12 @@
                                 <div class="form-group">
                                     <label class="form-label">Combustible <span class="text-danger">
                                             *</span></label>
-                                    <input type="text" name="fuel" class="form-control" required>
+                                    <select class="form-control" name="fuel" required>
+                                        <option></option>
+                                        <option name="fuel" value="Gasolina">Gasolina</option>
+                                        <option name="fuel" value="Diesel">Diesel</option>
+                                        <option name="fuel" value="Gas">Gas</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

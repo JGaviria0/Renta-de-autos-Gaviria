@@ -5,24 +5,24 @@
     <br>
     <div class="row">
         <div class="col-md-4 mx-auto">
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-body">
                     <form action="/links/gastos/{{link.id}}" method="POST">
                         <h6 class="text-center text-dark">Datos del vehículo</h6>
                         <div class="form-group">
-                            <label class="text-dark">Placa</label>
-                            <input type="text" value="{{link.title}}" class="form-control" name="title"
+                            <label class="text-dark">Marca</label>
+                            <input type="text" value="{{link.brand}}" class="form-control" name="title"
                                 placeholder="Title" readonly>
                         </div>
                         <div class="form-group">
-                            <label class="text-dark">URL</label>
-                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL"
+                            <label class="text-dark">Modelo</label>
+                            <input type="url" value="{{link.model}} " name="url" class="form-control" placeholder="URL"
                                 readonly>
                         </div>
                         <div class="form-group">
-                            <label class="text-dark">Descripción</label>
-                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion"
-                                readonly>{{link.description}}</textarea>
+                            <label class="text-dark">Placa</label>
+                            <input type="url" value="{{link.plate}} " name="url" class="form-control" placeholder="URL"
+                                readonly>
                         </div>
 
                         <div class="dropdown-divider"></div>
@@ -35,6 +35,10 @@
                         <div class="form-group">
                             <label class="text-dark">Valor<span class="text-danger"> *</span></label>
                             <input type="number" class="form-control" name="valor" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-dark">Fecha <span class="text-danger"> *</span></label>
+                            <input type="date" name="fecha" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary btn-block">Agregar</button>

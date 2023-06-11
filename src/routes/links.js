@@ -29,6 +29,11 @@ router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
     res.redirect('/profile')
 })
 
+router.get('/gestionarCarro/:id', isLoggedIn, async(req, res) => {
+    const { id } = req.params
+    const links = await pool.query('SELECT * FROM links WHERE id = ?', [id])
+    res.render('links/gestionarCarro', {link: links[0]})
+})
 
 router.get('/add', isLoggedIn, (req, res) => {
     res.render('links/add')
@@ -55,7 +60,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
         user_id : req.user.id
     }
     await pool.query('INSERT INTO links set ?', [newLink] )
-    req.flash('success', 'Carro agregado exitosamente.')
+    req.flash('success', 'El vehículo fue registrado correctamente.')
     res.redirect('/links')
 })
 
@@ -154,7 +159,7 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
         fuel
     }
     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
-    req.flash('success', 'Datos de auto actualizados')
+    req.flash('success', 'Los datos de su vehículo han sido actualizados correctamente')
     res.redirect('/links')
 })
 

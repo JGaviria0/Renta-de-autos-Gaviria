@@ -1,34 +1,48 @@
 <div class="container p-4">
     <div class="mx-auto text-center">
-        <h1 > Agregar gasto </h1>
+        <h2 class="text-primary"> Agregar Gasto</h1>
     </div>
     <br>
     <div class="row">
         <div class="col-md-4 mx-auto">
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-body">
                     <form action="/links/gastos/{{link.id}}" method="POST">
+                        <h6 class="text-center text-dark">Datos del vehículo</h6>
                         <div class="form-group">
-                            <input type="text" value="{{link.title}}" class="form-control" name="title" placeholder="Title" readonly>
+                            <label class="text-dark">Marca</label>
+                            <input type="text" value="{{link.brand}}" class="form-control" name="title"
+                                placeholder="Title" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL" readonly>
+                            <label class="text-dark">Modelo</label>
+                            <input type="url" value="{{link.model}} " name="url" class="form-control" placeholder="URL"
+                                readonly>
                         </div>
                         <div class="form-group">
-                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion" readonly>{{link.description}}</textarea>
+                            <label class="text-dark">Placa</label>
+                            <input type="url" value="{{link.plate}} " name="url" class="form-control" placeholder="URL"
+                                readonly>
                         </div>
+
                         <div class="dropdown-divider"></div>
-                        <p>Datos del Gasto </p> 
+
+                        <h6 class="text-center text-dark">Datos del gasto</h6>
                         <div class="form-group">
-                            <input type="text"  class="form-control" value="{{link2.nombre}}" name="ingreso" placeholder="Descripcion Gasto" required>
+                            <label class="text-dark">Descripción <span class="text-danger"> *</span></label>
+                            <input type="text" class="form-control" name="ingreso" value={{link2.nombre}} autofocus
+                                required>
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" name="valor" placeholder="Valor"  required>
+                            <label class="text-dark">Valor<span class="text-danger"> *</span></label>
+                            <input type="number" class="form-control" name="valor" value={{link2.km}} required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success btn-block">
-                                Save
-                            </button>
+                            <label class="text-dark">Fecha <span class="text-danger"> *</span></label>
+                            <input type="date" name="fecha" class="form-control" value={{link2.fecha}} required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block">Agregar</button>
                         </div>
                     </form>
                 </div>
