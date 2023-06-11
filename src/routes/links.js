@@ -165,27 +165,26 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
 
 router.get('/editGastos/:id_ingreso', isSuperRoot, async (req, res) => {
     const { id_ingreso } = req.params 
-    const links = await pool.query('SELECT * FROM ingresos WHERE id_ingreso = ?', [id_ingreso])
+    const links = await pool.query('SELECT * FROM ingresos WHERE id = ?', [id_ingreso])
     
     res.render('links/editGastos', { link: links[0] })
 })
 
-router.post('/editGastos/:id_ingreso', isSuperRoot, async(req, res) => {
-    const { id_ingreso } = req.params
+router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
+    const { id_gasto } = req.params
     const naturaleza = 'Gastos'
-    const { id, title, url ,description, ingreso, valor, fecha } = req.body
+    const { id, ingreso, valor, fecha } = req.body
+    console.log(req.body)
     const newLink = {
-        id,
-        title,
-        url,
-        description,
+        id: id_gasto,
+        id_car: id,
         ingreso,
         valor,
         fecha,
         naturaleza
     }
     
-    await pool.query('UPDATE ingresos set ? WHERE id_ingreso = ?', [newLink, id_ingreso])
+    await pool.query('UPDATE ingresos set ? WHERE id = ?', [newLink, id_gasto])
     req.flash('success', 'Gasto Editado con exito')
     res.redirect('../ingresosCarro/' + id)
 })
@@ -326,6 +325,11 @@ router.get('/gastoRealizado/:id_mantenimiento', isSuperRoot, async (req, res) =>
     await pool.query('DELETE FROM mantenimientos WHERE id_mantenimiento = ? ', [id_mantenimiento])
 
 })
+
+// router.get('/deshabilitarCar/:id_car', isSuperRoot, async (req, res) => {
+//     const { id_mantenimiento } = req.params 
+
+// })
 
 router.get('/mantenimiento/:id', isSuperRoot, async (req, res) => { 
     const { id } = req.params 
