@@ -104,15 +104,15 @@ router.post('/ingresosCarro/:id', isLoggedIn, async(req, res) => {
 router.get('/', isLoggedIn, async(req,res) => { 
     const Disponible = 'Disponible'
     if(req.user.username == 'root'){
-        const links = await pool.query('SELECT * FROM links WHERE estado = ?', [Disponible])
+        const links = await pool.query('SELECT * FROM links', [Disponible])
         res.render('links/list', { links })
     } 
     else if (req.user.user_type == 'cliente') {
-        const links = await pool.query('SELECT * FROM links WHERE estado = ?', [Disponible])
+        const links = await pool.query('SELECT * FROM links', [Disponible])
         res.render('links/listCustomer', { links })
     }
     else {
-        const links = await pool.query('SELECT * FROM links WHERE estado = ? AND user_id = ?', [Disponible, req.user.id])
+        const links = await pool.query('SELECT * FROM links WHERE user_id = ?', [Disponible, req.user.id])
         res.render('links/listOwner', { links })
     }
 })
@@ -166,7 +166,6 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
 router.get('/editGastos/:id_ingreso', isSuperRoot, async (req, res) => {
     const { id_ingreso } = req.params 
     const links = await pool.query('SELECT * FROM ingresos WHERE id = ?', [id_ingreso])
-    
     res.render('links/editGastos', { link: links[0] })
 })
 
@@ -176,8 +175,6 @@ router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
     const { id, ingreso, valor, fecha } = req.body
     console.log(req.body)
     const newLink = {
-        id: id_gasto,
-        id_car: id,
         ingreso,
         valor,
         fecha,
@@ -326,10 +323,11 @@ router.get('/gastoRealizado/:id_mantenimiento', isSuperRoot, async (req, res) =>
 
 })
 
-// router.get('/deshabilitarCar/:id_car', isSuperRoot, async (req, res) => {
-//     const { id_mantenimiento } = req.params 
-
-// })
+router.get('/deshabilitarCar/:id_car', isSuperRoot, async (req, res) => {
+    const { id_car } = req.params;
+    await pool.query('UPDATE links SET estado = "Deshabilitado" WHERE id = ?;', [id_car]);
+    res.redirect('/links');
+})
 
 router.get('/mantenimiento/:id', isSuperRoot, async (req, res) => { 
     const { id } = req.params 
