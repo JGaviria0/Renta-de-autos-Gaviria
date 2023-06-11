@@ -36,11 +36,22 @@ router.get('/add', isLoggedIn, (req, res) => {
 
 router.post('/add', isLoggedIn, async (req, res) => {
     console.log(req.user.id);
-    const { title, url, description } = req.body;
+    const { brand,
+        plate,
+        gearbox,
+        url,
+        model,
+        transit_license,
+        fuel, } = req.body;
+        
     const newLink = {
-        title,
-        url, 
-        description,
+        brand,
+        plate,
+        gearbox,
+        url,
+        model,
+        transit_license,
+        fuel,
         user_id : req.user.id
     }
     await pool.query('INSERT INTO links set ?', [newLink] )
@@ -125,11 +136,22 @@ router.get('/edit/:id', isLoggedIn, async (req, res) => {
 
 router.post('/edit/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
-    const { title, description, url } = req.body
-    const newLink = { 
-        title, 
-        description, 
-        url
+    const { brand,
+        plate,
+        gearbox,
+        url,
+        model,
+        transit_license,
+        fuel, } = req.body;
+        
+    const newLink = {
+        brand,
+        plate,
+        gearbox,
+        url,
+        model,
+        transit_license,
+        fuel
     }
     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
     req.flash('success', 'Datos de auto actualizados')

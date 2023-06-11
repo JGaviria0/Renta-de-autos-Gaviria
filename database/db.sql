@@ -26,14 +26,21 @@ ALTER TABLE users
 
 CREATE TABLE links (
     id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(150) NOT NULL,
-    url VARCHAR(250) NOT NULL,
-    description TEXT, 
+    brand VARCHAR(100) NOT NULL,
+    plate VARCHAR(100) NOT NULL,
+    gearbox VARCHAR(100) NOT NULL,
+    url VARCHAR(600) NOT NULL,
+    model VARCHAR(100) NOT NULL,
+    transit_license VARCHAR(100) NOT NULL,
+    fuel VARCHAR(100) NOT NULL,
     user_id INT(11),
-    created_at timestamp NOT NULL DEFAULT current_timestamp,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id),
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
     estado VARCHAR(50) NOT NULL DEFAULT 'Disponible'
 );
+    -- title VARCHAR(150) NOT NULL,
+    -- url VARCHAR(250) NOT NULL,
+    -- description TEXT, 
 
 ALTER TABLE links
 
