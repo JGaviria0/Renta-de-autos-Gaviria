@@ -154,7 +154,7 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
         fuel
     }
     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
-    req.flash('success', 'Datos de auto actualizados')
+    req.flash('success', 'Los datos de su vehículo han sido actualizados correctamente')
     res.redirect('/links')
 })
 
