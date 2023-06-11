@@ -1,6 +1,6 @@
 <div class="container p-4">
     <div class="col-md-6 mx-auto">
-        <h1 class="mx-auto p-2 text-center text-primary"> Vehículos </h1>
+        <h1 class="mx-auto p-2 text-center text-primary"> Mís Vehículos </h1>
     </div>
     <div class="row">
         {{#each links}}
@@ -9,15 +9,10 @@
                 <div class="card-body">
                     <img src={{url}} width="250px" height="200px" class="" />
                     <h3 class="card-title text-uppercase m-2 text-dark">{{ title }}</h3>
-                    </a>
                     <h5 class="m-2 text-dark"> {{ description }}</h5>
 
-                    {{!-- <p>{{timeago created_at}}</p> --}}
-
-                    {{!-- <a href="/links/formularioRenta/{{id}}" class="btn btn-danger m-1"> Rentar </a>
-                    <a href="/links/edit/{{id}}" class="btn btn-secondary m-1">Edit</a> --}}
-                    <a href="/links/ingresosCarro/{{id}}" class="btn btn-primary m-2">Visualizar</a>
-                    <a href="/links/reservarCarro/{{id}}" class="btn btn-secondary m-2">Reservar</a>
+                    <a href="/links/gestionarCarro/{{id}}" class="btn btn-primary m-2">Gestionar</a>
+                    <a href="/links/ingresosCarro/{{id}}" class="btn btn-secondary m-2">Ganancias</a>
 
                 </div>
             </div>
@@ -25,7 +20,8 @@
         {{else}}
         <div class="col-md-4 mx-auto">
             <div class="card card-body text-center">
-                <p> Aún no hay carros registrados </p>
+                <p> Aún no tienes carros registrados </p>
+                <a href="/links/add"> ¡Registra tu carro aquí! </a>
             </div>
         </div>
         {{/each}}
