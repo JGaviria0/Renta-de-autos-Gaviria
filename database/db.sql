@@ -72,19 +72,18 @@ ALTER TABLE rentados
 
 
 CREATE TABLE ingresos (
-    id_ingreso INT(11) NOT NULL,
-    id INT(11) NOT NULL,
-    title VARCHAR(150) NOT NULL,
-    url VARCHAR(250) NOT NULL,
-    description TEXT,
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_car INT(11) NOT NULL ,
+    CONSTRAINT fk_car FOREIGN KEY (id_car) REFERENCES links(id),
     ingreso VARCHAR(150) NOT NULL,
     valor VARCHAR(150) NOT NULL,
-    fecha date NOT NULL
+    fecha timestamp NOT NULL DEFAULT current_timestamp,
+    naturaleza VARCHAR(150) NOT NULL
 );
 
 ALTER TABLE ingresos 
-    ADD PRIMARY KEY(id_ingreso),
-    MODIFY id_ingreso INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    ADD PRIMARY KEY(id),
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE ingresos 
     ADD naturaleza VARCHAR(150) NOT NULL;
@@ -122,7 +121,7 @@ ALTER TABLE historial
     MODIFY id_historial INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE historial
-    ADD id_ingreso INT(11) NOT NULL;
+    ADD id INT(11) NOT NULL;
 
 
 CREATE TABLE porcentaje (
