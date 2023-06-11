@@ -29,6 +29,11 @@ router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
     res.redirect('/profile')
 })
 
+router.get('/gestionarCarro/:id', isLoggedIn, async(req, res) => {
+    const { id } = req.params
+    const links = await pool.query('SELECT * FROM links WHERE id = ?', [id])
+    res.render('links/gestionarCarro', {link: links[0]})
+})
 
 router.get('/add', isLoggedIn, (req, res) => {
     res.render('links/add')

@@ -3,8 +3,8 @@
         <div class="card border-primary">
             <div class="card-body">
                 <div class="text-center">
-                    <h3 class="text-center text-primary"> {{link3.title}} </h3>
-                    <h5 class="text-center text-primary"> {{link3.description}} </h4>
+                    <h3 class="text-center text-primary"> {{link3.brand}} {{link3.model}} </h3>
+                    <h5 class="text-center text-primary"> {{link3.plate}} </h4>
                 </div>
                 <div class="row">
                     <div class="p-2 text-dark">
@@ -14,10 +14,10 @@
                         <h6>Combustible: </h6>
                     </div>
                     <div class="p-2 text-secondary">
-                        <h6>{{user.identity_document}}</h6>
-                        <h6>{{user.email}}</h6>
-                        <h6>{{user.cellphone_number}}</h6>
-                        <h6>{{user.user_type}}</h6>
+                        <h6>{{user.first_name}} {{user.last_name}}</h6>
+                        <h6>{{link3.transit_license}}</h6>
+                        <h6>{{link3.gearbox}}</h6>
+                        <h6>{{link3.fuel}}</h6>
                     </div>
                 </div>
 
