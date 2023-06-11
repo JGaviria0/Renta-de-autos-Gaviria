@@ -9,27 +9,6 @@
                 <div class="card-body">
                     <form action="/links/editGastos/{{link.id}}" method="POST">
                         <div class="form-group">
-                            <input type="number" value="{{link.id}}" class="form-control" name="id" placeholder="Title"
-                                readonly>
-                        </div>
-                        <h6 class="text-center text-dark">Datos del vehículo</h6>
-                        <div class="form-group">
-                            <label class="text-dark">Marca</label>
-                            <input type="text" value="{{link.brand}}" class="form-control" name="brand" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-dark">Modelo</label>
-                            <input type="url" value="{{link.model}} " name="model" class="form-control" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-dark">Placa</label>
-                            <input type="url" value="{{link.plate}} " name="plate" class="form-control" readonly>
-                        </div>
-
-                        <div class="dropdown-divider"></div>
-
-                        <h6 class="text-center text-dark">Datos del gasto</h6>
-                        <div class="form-group">
                             <label class="text-dark">Descripción<span class="text-danger"> *</span></label>
                             <input type="text" class="form-control" value="{{link.ingreso}}" name="ingreso" autofocus
                                 required>
