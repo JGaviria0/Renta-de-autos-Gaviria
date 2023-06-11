@@ -60,7 +60,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
         user_id : req.user.id
     }
     await pool.query('INSERT INTO links set ?', [newLink] )
-    req.flash('success', 'Carro agregado exitosamente.')
+    req.flash('success', 'El vehículo fue registrado correctamente.')
     res.redirect('/links')
 })
 
