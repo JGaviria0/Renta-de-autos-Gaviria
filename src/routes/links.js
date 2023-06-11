@@ -302,14 +302,8 @@ router.get('/gastos/:id', isSuperRoot, async (req, res) => {
 
 router.post('/gastos/:id_car', isSuperRoot, async(req, res) => {
     const naturaleza = 'Gastos'
-<<<<<<< HEAD
-    const { id } = req.params
-    const { title, url, description, ingreso, valor} = req.body
-    console.log(req.body)
-=======
     const { id_car } = req.params
     const {ingreso, valor, fecha} = req.body
->>>>>>> main
     const nuevoGasto = {
         id_car,
         ingreso,
