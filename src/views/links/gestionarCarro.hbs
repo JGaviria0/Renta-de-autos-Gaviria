@@ -12,12 +12,14 @@
           <h6>Licencia de tránsito: </h6>
           <h6>Caja de cambios: </h6>
           <h6>Combustible: </h6>
+          <h6>Estado: </h6>
         </div>
         <div class="p-2 text-secondary">
           <h6>{{user.first_name}} {{user.last_name}}</h6>
           <h6>{{link.transit_license}}</h6>
           <h6>{{link.gearbox}}</h6>
           <h6>{{link.fuel}}</h6>
+          <h6>{{link.estado}}</h6>
         </div>
       </div>
     </div>
@@ -25,6 +27,11 @@
   <div class="p-5">
     <a href="/links/edit/{{link.id}}" class="btn btn-primary btn-block">Editar vehículo</a>
     <br>
-    <a href="" class="btn btn-danger btn-block">Deshabilitar vehículo</a>
+    {{#if link.disponible}}
+    <a href="/links/deshabilitarCar/{{link.id}}" class="btn btn-danger btn-block">Deshabilitar vehículo</a>
+    {{else}}
+    <a href="/links/habilitarCar/{{link.id}}" class="btn btn-success btn-block">Habilitar vehículo</a>
+    {{/if}}
+
   </div>
 </div>
