@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const pool = require('../database')
-const { isLoggedIn, isSuperRoot } = require('../lib/auth');
+const { isLoggedIn, isSuperRoot, isNotLoggedIn } = require('../lib/auth');
 
 router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
     const user = await pool.query('SELECT * FROM users')
@@ -32,6 +32,12 @@ router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
 router.get('/gestionarCarro/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
     const links = await pool.query('SELECT * FROM links WHERE id = ?', [id])
+    if (links[0].estado == 'Disponible'){
+        links[0].disponible = true
+    }
+    else {
+        links[0].disponible = false
+    }
     res.render('links/gestionarCarro', {link: links[0]})
 })
 
@@ -112,7 +118,7 @@ router.get('/', isLoggedIn, async(req,res) => {
         res.render('links/listCustomer', { links })
     }
     else {
-        const links = await pool.query('SELECT * FROM links WHERE user_id = ?', [Disponible, req.user.id])
+        const links = await pool.query('SELECT * FROM links WHERE user_id = ?', [req.user.id])
         res.render('links/listOwner', { links })
     }
 })
@@ -172,7 +178,7 @@ router.get('/editGastos/:id_ingreso', isSuperRoot, async (req, res) => {
 router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
     const { id_gasto } = req.params
     const naturaleza = 'Gastos'
-    const { id, ingreso, valor, fecha } = req.body
+    const {ingreso, valor, fecha } = req.body
     console.log(req.body)
     const newLink = {
         ingreso,
@@ -182,8 +188,9 @@ router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
     }
     
     await pool.query('UPDATE ingresos set ? WHERE id = ?', [newLink, id_gasto])
-    req.flash('success', 'Gasto Editado con exito')
-    res.redirect('../ingresosCarro/' + id)
+    req.flash('success', 'Gasto Eeditado con exito')
+    const id = await pool.query('SELECT * FROM ingresos WHERE id = ?', [id_gasto]);
+    res.redirect('../ingresosCarro/' + id[0].id_car)
 })
 
 router.get('/rentadoPor/:id', isLoggedIn, async (req, res) => {
@@ -323,10 +330,27 @@ router.get('/gastoRealizado/:id_mantenimiento', isSuperRoot, async (req, res) =>
 
 })
 
-router.get('/deshabilitarCar/:id_car', isSuperRoot, async (req, res) => {
+router.get('/deshabilitarCar/:id_car', isLoggedIn, async (req, res) => {
     const { id_car } = req.params;
     await pool.query('UPDATE links SET estado = "Deshabilitado" WHERE id = ?;', [id_car]);
-    res.redirect('/links');
+    res.redirect('/links/gestionarCarro/' + id_car);
+})
+
+router.get('/habilitarCar/:id_car', isLoggedIn, async (req, res) => {
+    const { id_car } = req.params;
+    await pool.query('UPDATE links SET estado = "Disponible" WHERE id = ?;', [id_car]);
+    res.redirect('/links/gestionarCarro/' + id_car);
+})
+
+router.get('/deshabilitarUser/:id_user', isLoggedIn, async (req, res) => {
+    const { id_user } = req.params;
+    await pool.query('DELETE FROM users WHERE id = ?;', [id_user]);
+    if (req.user.username == 'root'){
+        res.redirect('links/gestionarUsuarios')
+    }
+    else{
+        res.redirect('/logout');
+    }
 })
 
 router.get('/mantenimiento/:id', isSuperRoot, async (req, res) => { 
