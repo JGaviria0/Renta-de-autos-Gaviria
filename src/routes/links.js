@@ -91,6 +91,11 @@ router.get('/ingresosCarro/:id', isLoggedIn, async(req, res) => {
     dict.ganacia = totalIngresos;
     link5.forEach(element => element.total = dict.ganacia*element.valor/100)
     totales.push(dict) 
+
+    if (totales[0].ganacia >= 0){
+        totales[0].utilidad = true
+    }
+
     res.render('links/ingresosCarro', { links: link, links2: link2, link3: links[0], links4: link4, links5: link5 , totales: totales[0]})
 })
 
