@@ -17,12 +17,13 @@ router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
 
 router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
-    const {username, password, email, cellphone_number} = req.body
+    const {username, password, email, cellphone_number, birth_date} = req.body
     const updateProfile = {
         username,
         password,
         email,
-        cellphone_number
+        cellphone_number,
+        birth_date
     }
     await pool.query('UPDATE users set ? WHERE id = ?', [updateProfile, id])
     req.flash('success', 'Su perfil ha sido actualizado correctamente')
@@ -171,7 +172,7 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
     }
     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
     req.flash('success', 'Los datos de su vehículo han sido actualizados correctamente')
-    res.redirect('/links')
+    res.redirect('/links/gestionarCarro/' + id)
 })
 
 router.get('/editGastos/:id_ingreso', isSuperRoot, async (req, res) => {
@@ -193,7 +194,7 @@ router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
     }
     
     await pool.query('UPDATE ingresos set ? WHERE id = ?', [newLink, id_gasto])
-    req.flash('success', 'Gasto Eeditado con exito')
+    req.flash('success', 'Gasto editado con exito')
     const id = await pool.query('SELECT * FROM ingresos WHERE id = ?', [id_gasto]);
     res.redirect('../ingresosCarro/' + id[0].id_car)
 })

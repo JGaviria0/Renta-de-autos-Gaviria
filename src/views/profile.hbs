@@ -1,5 +1,23 @@
 {{#if user.isroot}}
-<div class="container2">
+<div class="container p-4 col-4 mx-auto">
+    <div class="card border-primary">
+        <div class="card-body">
+            <div class="text-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png"
+                    class="img-fluid w-50 h-50" />
+                <h4 class="text-primary pt-2">Administrador</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-2 mx-auto">
+    <a href="/links/gestionarUsuarios" class="btn btn-secondary btn-block">Usuarios</a>
+    <br>
+    <a href="/links" class="btn btn-secondary btn-block">Vehículos</a>
+    <br>
+    <a href="/" class="btn btn-secondary btn-block">Reservas</a>
+    <br>
+    <a href="/" class="btn btn-secondary btn-block">Pagos</a>
 </div>
 {{else}}
 <div class="container p-5 col-4 mx-auto">
