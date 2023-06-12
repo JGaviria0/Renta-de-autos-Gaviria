@@ -10,6 +10,12 @@ router.get('/reservarAdmin/:id', isSuperRoot, isLoggedIn, async(req, res) => {
     res.render('links/reservarAdmin',{links: link[0]})
 })
 
+router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
+    const { id } = req.params
+    const link = await pool.query('SELECT * FROM links WHERE id = ?', [id] )
+    res.render('links/reservarCustomer',{links: link[0]})
+})
+
 router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
     const user = await pool.query('SELECT * FROM users')
     res.render('links/gestionarUsuarios',{users: user})
