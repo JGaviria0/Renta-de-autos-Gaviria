@@ -124,7 +124,8 @@ router.post('/add', isLoggedIn, async (req, res) => {
         url,
         model,
         transit_license,
-        fuel, } = req.body;
+        fuel, 
+        price } = req.body;
         
     const newLink = {
         brand,
@@ -134,6 +135,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
         model,
         transit_license,
         fuel,
+        price,
         user_id : req.user.id
     }
     await pool.query('INSERT INTO links set ?', [newLink] )
@@ -229,7 +231,8 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
         url,
         model,
         transit_license,
-        fuel, } = req.body;
+        fuel, 
+        price} = req.body;
         
     const newLink = {
         brand,
@@ -238,7 +241,8 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
         url,
         model,
         transit_license,
-        fuel
+        fuel,
+        price
     }
     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
     req.flash('success', 'Los datos de su vehículo han sido actualizados correctamente')
