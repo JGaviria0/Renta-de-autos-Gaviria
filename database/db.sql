@@ -13,11 +13,12 @@ CREATE TABLE users(
     identity_document VARCHAR(100) NOT NULL, 
     cellphone_number VARCHAR(100) NOT NULL, 
     user_type VARCHAR(100) NOT NULL,
-    birth_date timestamp NOT NULL
+    birth_date timestamp NOT NULL,
+    price int(22) NOT NULL
 );
 
 ALTER TABLE users 
-    ADD birth_date timestamp NOT NULL;
+    ADD price int(22) NOT NULL;
 
 -- ALTER TABLE users
 --     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2; 
@@ -42,12 +43,12 @@ CREATE TABLE links (
     -- url VARCHAR(250) NOT NULL,
     -- description TEXT, 
 
-ALTER TABLE links
+-- ALTER TABLE links
 
-ALTER TABLE links 
-    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2; 
+-- ALTER TABLE links 
+--     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2; 
 
-DESCRIBE links; 
+-- DESCRIBE links; 
 
 CREATE TABLE rentados (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -65,17 +66,18 @@ CREATE TABLE rentados (
     transit_license VARCHAR(150) NOT NULL,
     start_date timestamp NOT NULL,
     end_date timestamp NOT NULL,
-    deposit_slip VARCHAR(150) NOT NULL,
+    deposit_slip VARCHAR(150),
     price INT(20) NOT NULL,
-    estado VARCHAR(150) NOT NULL
+    estado VARCHAR(150) NOT NULL,
+    payment_date timestamp
 );
 
-ALTER TABLE rentados 
-    ADD PRIMARY KEY(id),
-    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+-- ALTER TABLE rentados 
+--     ADD PRIMARY KEY(id),
+--     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
-ALTER TABLE rentados 
-    ADD id_carro INT(11) NOT NULL; 
+-- ALTER TABLE rentados 
+--     ADD id_carro INT(11) NOT NULL; 
 
 
 

@@ -12,17 +12,63 @@ router.get('/reservarAdmin/:id', isSuperRoot, isLoggedIn, async(req, res) => {
         <script>
         $(document).ready(function(){
             $("#datepicker").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
             });
             $("#datepicker2").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
             });
         });
         </script>
     `;
     res.render('links/reservarAdmin',{links: link[0], datepickerScript})
+})
+
+router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
+    const reservado = 'Reservado'
+    
+    const { id } = req.params
+    const car = await pool.query('SELECT * FROM links WHERE id = ?', [id])
+    const {
+        document_type,
+        firstname,
+        birth_date,
+        email,
+        start_date,
+        document_number,
+        lastname,
+        phone_number,
+        transit_license,
+        end_date
+    } = req.body
+
+    const firstDate = new Date(start_date);
+    const lastDate = new Date(end_date);
+
+    const days = lastDate.getTime() - firstDate.getTime() 
+    const totalPrice = Math.round(days/ (1000*60*60*24)) * car[0].price; 
+
+    const newLink = { 
+        id_car: id,
+        document_type,
+        firstname,
+        birth_date,
+        email,
+        start_date,
+        document_number,
+        lastname,
+        phone_number,
+        transit_license,
+        end_date, 
+        estado: reservado,
+        price: totalPrice
+    }
+    
+    
+    await pool.query('INSERT INTO rentados set ?', [newLink] )
+    req.flash('success', 'Rentado correctamente')
+    res.redirect('/links/rentados')
 })
 
 router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
@@ -33,11 +79,11 @@ router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
         <script>
         $(document).ready(function(){
             $("#datepicker").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
             });
             $("#datepicker2").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
             });
         });
