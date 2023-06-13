@@ -12,17 +12,77 @@ router.get('/reservarAdmin/:id', isSuperRoot, isLoggedIn, async(req, res) => {
         <script>
         $(document).ready(function(){
             $("#datepicker").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
             });
             $("#datepicker2").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
             });
         });
         </script>
     `;
     res.render('links/reservarAdmin',{links: link[0], datepickerScript})
+})
+
+router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
+    const reservado = 'Reservado'
+    const { id } = req.params
+    const { 
+        document_type,
+        firstname,
+        birth_date,
+        email,
+        start_date,
+        document_number,
+        lastname,
+        phone_number,
+        transit_license,
+        end_date
+    } = req.body
+
+
+    const newLink = { 
+        id_car: id,
+        document_type,
+        firstname,
+        birth_date,
+        email,
+        start_date,
+        document_number,
+        lastname,
+        phone_number,
+        transit_license,
+        end_date, 
+        estado: reservado
+    }
+    const naturaleza = "Ingreso";
+    // const valor = precio
+    // const ingresoNuevo = {
+    //     id_car: id,
+    //     ingreso: firstname,
+    //     valor: 
+    // }
+    
+    // await pool.query('UPDATE links SET estado = ? WHERE id = ?', [Rentado, id] )
+    await pool.query('INSERT INTO rentados set ?', [newLink] )
+    // await pool.query('INSERT INTO ingresos set ?', [ingresoNuevo] )
+    // const links = await pool.query('SELECT id_ingreso FROM ingresos ORDER BY ID DESC LIMIT 1 ')
+    // const id_ingreso = links[0].id_ingreso
+    // const nuevoRegistro = { 
+    //     id,
+    //     nombre,
+    //     cc,
+    //     telefono,
+    //     fechaInicio,
+    //     fechaFin,
+    //     precio,
+    //     id_ingreso
+    // }
+    // await pool.query('INSERT INTO historial set ?', [nuevoRegistro] )
+
+    req.flash('success', 'Rentado correctamente')
+    res.redirect('/links/rentados')
 })
 
 router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
@@ -33,11 +93,11 @@ router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
         <script>
         $(document).ready(function(){
             $("#datepicker").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
             });
             $("#datepicker2").datepicker({
-            format: 'dd-mm-yyyy',
+            format: 'yyyy-mm-dd',
             datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
             });
         });
