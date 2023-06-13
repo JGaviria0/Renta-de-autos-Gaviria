@@ -1,46 +1,60 @@
 <div class="container p-4">
     <div class="mx-auto text-center">
-        <h1 > Detalles de la renta </h1>
+        <h2 class="text-primary"> Detalles de la Renta </h2>
     </div>
     <br>
     <div class="row">
         <div class="col-md-4 mx-auto">
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-body">
-                    <form action="/links/rentados" >
+                    <form action="/links/rentados">
+                        <h6 class="text-center text-dark">Datos del vehículo</h6>
                         <div class="form-group">
-                            <input type="text" value="{{link.title}}" class="form-control" name="title" placeholder="Title" readonly>
+                            <label class="text-dark">Marca</label>
+                            <input type="text" value="{{}}" name="brand" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="url" value="{{link.url}} " name="url" class="form-control" placeholder="URL" readonly>
+                            <label class="text-dark">Modelo</label>
+                            <input type="text" value="{{}} " name="model" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion" readonly>{{link.description}}</textarea>
+                            <label class="text-dark">Placa</label>
+                            <input type="text" value="{{}} " name="plate" class="form-control" readonly>
                         </div>
+
                         <div class="dropdown-divider"></div>
-                        <p>Datos del usuario </p> 
+
+                        <h6 class="text-center text-dark">Datos del usuario</h6>
                         <div class="form-group">
-                            <input type="text" value="{{link.nombre}}"class="form-control" name="nombre" placeholder="Nombre Completo" readonly>
+                            <label class="text-dark">Documento de identificación</label>
+                            <input type="text" value="{{}}" name="document_number" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="text" value="{{link.cc}}" class="form-control" name="cc" placeholder="C.C." readonly>
+                            <label class="text-dark">Nombre completo</label>
+                            <input type="text" value="{{}} " name="firstname" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="text" value="{{link.telefono}}" class="form-control" name="telefono" placeholder="Telefono" readonly>
+                            <label class="text-dark">Nombre completo</label>
+                            <input type="number" value="{{}} " name="phone_number" class="form-control" readonly>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+
+                        <h6 class="text-center text-dark">Datos de la renta</h6>
+                        <div class="form-group">
+                            <label class="text-dark">Fecha inicio</label>
+                            <input type="text" value="{{}}" name="start_date" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                             <p >  Fecha de Inicio: <input type="date" value="{{timeago2 link.fechaInicio}}" name="fechaFin" class="form-control" readonly> </p>
+                            <label class="text-dark">Fecha fin</label>
+                            <input type="text" value="{{}} " name="end_date" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <p >  Fecha de fin: <input type="date" value="{{timeago2 link.fechaFin}}" name="fechaFin" class="form-control" readonly> </p>
+                            <label class="text-dark">Monto</label>
+                            <input type="number" value="{{}} " name="price" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="txt" value="${{link.precio}}" class="form-control" name="precio" placeholder="Precio total" step="10" readonly>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-success btn-block">
-                                Volver
-                            </button>
+                            <button class="btn btn-primary btn-block">Volver</button>
                         </div>
                     </form>
                 </div>
