@@ -61,7 +61,7 @@ CREATE TABLE rentados (
     firstname VARCHAR(150) NOT NULL,
     lastname VARCHAR(150) NOT NULL,
     birth_date timestamp NOT NULL,
-    phone_number INT(11) NOT NULL,
+    phone_number VARCHAR(150) NOT NULL,
     email VARCHAR(150) NOT NULL,
     transit_license VARCHAR(150) NOT NULL,
     start_date timestamp NOT NULL,

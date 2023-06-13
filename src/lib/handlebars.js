@@ -7,7 +7,7 @@ helpers.timeago = (timestamp) => {
 }
 
 helpers.timeago2 = (timestamp) => {
-    var date = timestamp
+    var date = new Date (timestamp)
 
     var day = date.getDate()
     var month = date.getMonth() + 1
