@@ -111,6 +111,34 @@ router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
     res.render('links/gestionarUsuarios',{users: user})
 })
 
+router.get('/gestionarReservasAdmin', isSuperRoot, isLoggedIn, async(req, res) => {
+    const renta = await pool.query('SELECT * FROM rentados')
+    res.render('links/gestionarReservasAdmin',{rentas: renta})
+})
+
+router.get('/gestionarReservasCustomer', isLoggedIn, async(req, res) => {
+    const renta = await pool.query('SELECT * FROM rentados')
+    res.render('links/gestionarReservasCustomer',{rentas: renta})
+})
+
+router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    const { deposit_slip, start_date, price } = req.body;
+    const newPayment = {
+        deposit_slip,
+        payment_date,
+        price
+    }
+    await pool.query('UPDATE rentados set ? WHERE id = ?', [newPayment, id] )
+    req.flash('success', 'El depósito fue pagado exitosamente.')
+    res.redirect('/gestionarReservasCustomer')
+})
+
+router.get('/verHistorialReservas', isLoggedIn, async(req, res) => {
+    const renta = await pool.query('SELECT * FROM rentados')
+    res.render('links/verHistorialReservas',{rentas: renta})
+})
+
 router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
     const user = await pool.query('SELECT * FROM users WHERE id = ?', [id])
@@ -156,7 +184,8 @@ router.post('/add', isLoggedIn, async (req, res) => {
         url,
         model,
         transit_license,
-        fuel, } = req.body;
+        fuel, 
+        price } = req.body;
         
     const newLink = {
         brand,
@@ -166,6 +195,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
         model,
         transit_license,
         fuel,
+        price,
         user_id : req.user.id
     }
     await pool.query('INSERT INTO links set ?', [newLink] )
@@ -261,7 +291,8 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
         url,
         model,
         transit_license,
-        fuel, } = req.body;
+        fuel, 
+        price} = req.body;
         
     const newLink = {
         brand,
@@ -270,7 +301,8 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
         url,
         model,
         transit_license,
-        fuel
+        fuel,
+        price
     }
     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
     req.flash('success', 'Los datos de su vehículo han sido actualizados correctamente')
