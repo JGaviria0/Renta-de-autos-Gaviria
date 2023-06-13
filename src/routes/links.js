@@ -4,6 +4,18 @@ const router = express.Router()
 const pool = require('../database')
 const { isLoggedIn, isSuperRoot, isNotLoggedIn } = require('../lib/auth');
 
+router.get('/reservarAdmin/:id', isSuperRoot, isLoggedIn, async(req, res) => {
+    const { id } = req.params
+    const link = await pool.query('SELECT * FROM links WHERE id = ?', [id] )
+    res.render('links/reservarAdmin',{links: link[0]})
+})
+
+router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
+    const { id } = req.params
+    const link = await pool.query('SELECT * FROM links WHERE id = ?', [id] )
+    res.render('links/reservarCustomer',{links: link[0]})
+})
+
 router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
     const user = await pool.query('SELECT * FROM users')
     res.render('links/gestionarUsuarios',{users: user})
@@ -17,12 +29,13 @@ router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
 
 router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
-    const {username, password, email, cellphone_number} = req.body
+    const {username, password, email, cellphone_number, birth_date} = req.body
     const updateProfile = {
         username,
         password,
         email,
-        cellphone_number
+        cellphone_number,
+        birth_date
     }
     await pool.query('UPDATE users set ? WHERE id = ?', [updateProfile, id])
     req.flash('success', 'Su perfil ha sido actualizado correctamente')
@@ -91,6 +104,11 @@ router.get('/ingresosCarro/:id', isLoggedIn, async(req, res) => {
     dict.ganacia = totalIngresos;
     link5.forEach(element => element.total = dict.ganacia*element.valor/100)
     totales.push(dict) 
+
+    if (totales[0].ganacia >= 0){
+        totales[0].utilidad = true
+    }
+
     res.render('links/ingresosCarro', { links: link, links2: link2, link3: links[0], links4: link4, links5: link5 , totales: totales[0]})
 })
 
@@ -166,7 +184,7 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
     }
     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
     req.flash('success', 'Los datos de su vehículo han sido actualizados correctamente')
-    res.redirect('/links')
+    res.redirect('/links/gestionarCarro/' + id)
 })
 
 router.get('/editGastos/:id_ingreso', isSuperRoot, async (req, res) => {
@@ -188,7 +206,7 @@ router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
     }
     
     await pool.query('UPDATE ingresos set ? WHERE id = ?', [newLink, id_gasto])
-    req.flash('success', 'Gasto Eeditado con exito')
+    req.flash('success', 'Gasto editado con exito')
     const id = await pool.query('SELECT * FROM ingresos WHERE id = ?', [id_gasto]);
     res.redirect('../ingresosCarro/' + id[0].id_car)
 })

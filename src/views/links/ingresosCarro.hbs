@@ -201,6 +201,16 @@
 
     <table class="table table-striped">
         <thead class="text-center">
+            {{#if totales.utilidad}}
+            <tr class="table-success">
+                <td>
+                    <h5>Total</h5>
+                </td>
+                <td>
+                    <h6> ${{totales.ganacia}} </h6>
+                </td>
+            </tr>
+            {{else}}
             <tr class="table-danger">
                 <td>
                     <h5>Total</h5>
@@ -209,8 +219,10 @@
                     <h6> ${{totales.ganacia}} </h6>
                 </td>
             </tr>
+            {{/if}}
         </thead>
     </table>
+    <br>
 
     {{!-- <!--      ____________________Porcentajes_________________             -->
 
