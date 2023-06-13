@@ -1,0 +1,38 @@
+<div class="container p-5">
+  <div class="mx-auto text-center">
+    <h2 class="text-primary">Gestionar reservas</h1>
+  </div>
+  <div class="p-5">
+    <table class="table table-striped mx-auto">
+      {{#if rentados}}
+      <thead class="thead-dark text-center">
+        <tr>
+          <th> N° Reserva </th>
+          <th> N° Comprobante </th>
+          <th> Cliente </th>
+          <th> Acción </th>
+        </tr>
+      </thead>
+      {{/if}}
+      {{#each rentados}}
+      <tbody class="text-center">
+        <tr>
+          <td>{{id}}</td>
+          <td>{{deposit_slip}}</td>
+          <td>{{firstname}} {{lastname}}</td>
+          <td>
+            <a href="" class="btn btn-primary"> Comprobar </a>
+            <a href="" class="btn btn-secondary"> Rentar </a>
+          </td>
+        </tr>
+      </tbody>
+      {{else}}
+      <div class="col-md-4 mx-auto">
+        <div class="card card-body text-center">
+          <p>No hay reservas realizadas</p>
+        </div>
+      </div>
+      {{/each}}
+    </table>
+  </div>
+</div>
