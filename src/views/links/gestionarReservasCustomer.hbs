@@ -4,7 +4,7 @@
   </div>
   <div class="p-5">
     <table class="table table-striped mx-auto">
-      {{#if rentados}}
+      {{#if rentas}}
       <thead class="thead-dark text-center">
         <tr>
           <th> Vehículo </th>
@@ -13,13 +13,12 @@
           <th> Acciones </th>
         </tr>
       </thead>
-      {{/if}}
-      {{#each rentados}}
+      {{#each rentas}}
       <tbody class="text-center">
         <tr>
-          <td>{{id_car}}</td>
-          <td>{{start_date}}</td>
-          <td>{{end_date}}</td>
+          <td>{{plate}}</td>
+          <td>{{timeago2 start_date}}</td>
+          <td>{{timeago2 end_date}}</td>
           <td>
             <a href="/links/pagarDeposito/{{id}}" class="btn btn-primary"> Pagar depósito </a>
             <br>
@@ -27,13 +26,14 @@
           </td>
         </tr>
       </tbody>
+      {{/each}}
       {{else}}
       <div class="col-md-4 mx-auto">
         <div class="card card-body text-center">
           <p>No hay reservas realizadas</p>
         </div>
       </div>
-      {{/each}}
+      {{/if}}
     </table>
   </div>
 </div>

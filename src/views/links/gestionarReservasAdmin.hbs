@@ -4,7 +4,7 @@
   </div>
   <div class="p-5">
     <table class="table table-striped mx-auto">
-      {{#if rentados}}
+      {{#if rentas}} 
       <thead class="thead-dark text-center">
         <tr>
           <th> N° Reserva </th>
@@ -13,11 +13,10 @@
           <th> Acción </th>
         </tr>
       </thead>
-      {{/if}}
-      {{#each rentados}}
+      {{#each rentas}}
       <tbody class="text-center">
         <tr>
-          <td>{{id}}</td>
+          <td>{{plate}}</td>
           <td>{{deposit_slip}}</td>
           <td>{{firstname}} {{lastname}}</td>
           <td>
@@ -26,13 +25,14 @@
           </td>
         </tr>
       </tbody>
+      {{/each}}
       {{else}}
       <div class="col-md-4 mx-auto">
         <div class="card card-body text-center">
           <p>No hay reservas realizadas</p>
         </div>
       </div>
-      {{/each}}
+      {{/if}}
     </table>
   </div>
 </div>
