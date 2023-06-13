@@ -10,7 +10,7 @@
           <th> Vehículo </th>
           <th> Fecha inicio </th>
           <th> Fecha fin </th>
-          <th> Acción </th>
+          <th> Acciones </th>
         </tr>
       </thead>
       {{/if}}
@@ -22,6 +22,8 @@
           <td>{{end_date}}</td>
           <td>
             <a href="/links/pagarDeposito/{{id}}" class="btn btn-primary"> Pagar depósito </a>
+            <br>
+            <a href="/" class="btn btn-primary"> Cancelar </a>
           </td>
         </tr>
       </tbody>
