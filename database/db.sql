@@ -81,15 +81,15 @@ CREATE TABLE ingresos (
     naturaleza VARCHAR(150) NOT NULL
 );
 
-ALTER TABLE ingresos 
-    ADD PRIMARY KEY(id),
-    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+-- ALTER TABLE ingresos 
+--     ADD PRIMARY KEY(id),
+--     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
-ALTER TABLE ingresos 
-    ADD naturaleza VARCHAR(150) NOT NULL;
+-- ALTER TABLE ingresos 
+--     ADD naturaleza VARCHAR(150) NOT NULL;
     
-ALTER TABLE ingresos 
-    MODIFY fecha timestamp NOT NULL DEFAULT current_timestamp;
+-- ALTER TABLE ingresos 
+--     MODIFY fecha timestamp NOT NULL DEFAULT current_timestamp;
 
 
 CREATE TABLE mantenimientos (

@@ -15,3 +15,37 @@ body {
     background-image: url("/img/index.png"); 
 }
 
+.datepicker {
+    font-family: Arial, sans-serif;
+}
+
+.datepicker table {
+    width: 100%;
+}
+
+.datepicker table th,
+.datepicker table td {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.datepicker table th {
+    font-weight: bold;
+}
+
+.datepicker table td.day.disabled {
+    background-color: #bd0811;
+    color: #ffffff;
+}
+
+.datepicker table td.day:hover:not(.disabled),
+.datepicker table td.day.focused:not(.disabled) {
+    background-color: #e9ecef;
+    color: #000;
+}
+
+.datepicker table td.today:not(.disabled) {
+    font-weight: bold;
+    background-color: #007bff;
+    color: #fff;
+}
