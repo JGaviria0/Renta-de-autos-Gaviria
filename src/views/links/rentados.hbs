@@ -1,33 +1,29 @@
 <div class="container p-4">
-    <div class="col-md-4 mx-auto">
-        <h1 class="mx-auto p-4">  Rentados </h1>
+    <div class="col-md-6 mx-auto">
+        <h2 class="mx-auto p-2 text-center text-primary"> Gestionar Rentas </h2>
     </div>
     <div class="row">
         {{#each links}}
-            <div class="col-md-3">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <a href="/links/ingresosCarro/{{id}}" >
-                            <h3 class="card-title text-uppercase">
-                                {{ title }}
-                            </h3>
-                        </a>
-                        <p class="m-2"> {{ description }}</p>
-                        <p>Rentado hasta: {{timeago3 fechaFin}}</p>
-                        
-                        <a href="/links/devuelto/{{id}}" class="btn btn-danger" > Devuelto </a>
-                        <a href="/links/rentadoPor/{{id}}" class="btn btn-secondary">Rentado por</a>
-                        
-                    </div>
+        <div class="col-md-4 p-4">
+            <div class="card text-center border-primary">
+                <div class="card-body">
+                    <img src={{url}} class="img-fluid rounded" />
+                    <h4 class="card-title m-2 text-dark">{{brand}} {{model}}</h4>
+                    <h5 class="m-2 text-dark"> {{plate}}</h5>
+                    <h6 class="m-2 text-dark"> Rentado hasta: {{timeago3 fechaFin}}</h6>
+
+                    <a href="/links/devuelto/{{id}}" class="btn btn-primary m-2">Finalizar</a>
+                    <a href="/links/rentadoPor/{{id}}" class="btn btn-secondary m-2">Detalles</a>
+
                 </div>
             </div>
+        </div>
         {{else}}
-            <div class="col-md-4 mx-auto">
-                <div class="card card-body text-center">
-                    <p>No hay carros rentados aun</p>
-                    <a href="/links"> rentar uno </a>
-                </div>
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>Aún no hay carros rentados</p>
             </div>
+        </div>
         {{/each}}
     </div>
 </div>

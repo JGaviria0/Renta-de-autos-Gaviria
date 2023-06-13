@@ -99,7 +99,7 @@ router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
 
 router.get('/gestionarReservasAdmin', isSuperRoot, isLoggedIn, async(req, res) => {
     const renta = await pool.query('SELECT * FROM rentados')
-    res.render('links/gestionarReservasAdmin',{rentas: renta})
+    res.render('links/gestionarReservasAdmin', {rentas: renta})
 })
 
 router.get('/gestionarReservasCustomer', isLoggedIn, async(req, res) => {
@@ -125,9 +125,9 @@ router.get('/verRentas', isLoggedIn, async(req, res) => {
     res.render('links/verRentas',{rentas: renta})
 })
 
-router.get('/gestionarRentas', isSuperRoot, isLoggedIn, async(req, res) => {
+router.get('/generarFactura', isSuperRoot, isLoggedIn, async(req, res) => {
     const renta = await pool.query('SELECT * FROM rentados')
-    res.render('links/gestionarRentas',{rentas: renta})
+    res.render('links/generarFactura',{rentas: renta})
 })
 
 router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
