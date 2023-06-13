@@ -143,11 +143,11 @@ router.post('/ingresosCarro/:id', isLoggedIn, async(req, res) => {
 router.get('/', isLoggedIn, async(req,res) => { 
     const Disponible = 'Disponible'
     if(req.user.username == 'root'){
-        const links = await pool.query('SELECT * FROM links', [Disponible])
+        const links = await pool.query('SELECT * FROM links WHERE estado = ?', [Disponible])
         res.render('links/list', { links })
     } 
     else if (req.user.user_type == 'cliente') {
-        const links = await pool.query('SELECT * FROM links', [Disponible])
+        const links = await pool.query('SELECT * FROM links WHERE estado = ?', [Disponible])
         res.render('links/listCustomer', { links })
     }
     else {

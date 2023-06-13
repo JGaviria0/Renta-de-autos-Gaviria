@@ -50,16 +50,24 @@ ALTER TABLE links
 DESCRIBE links; 
 
 CREATE TABLE rentados (
-    id INT(11) NOT NULL,
-    title VARCHAR(150) NOT NULL,
-    url VARCHAR(250) NOT NULL,
-    description TEXT, 
-    nombre VARCHAR(150) NOT NULL,
-    cc VARCHAR(15) NOT NULL,
-    telefono VARCHAR(11) NOT NULL,
-    fechaInicio date NOT NULL,
-    fechaFin date NOT NULL,
-    precio INT(10) NOT NULL 
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_user INT(11),
+    CONSTRAINT fk_user2 FOREIGN KEY (id_user) REFERENCES users(id),
+    id_car INT(11) NOT NULL,
+    CONSTRAINT fk_car2 FOREIGN KEY (id_car) REFERENCES links(id),
+    document_type VARCHAR(150) NOT NULL,
+    document_number VARCHAR(150) NOT NULL,
+    firstname VARCHAR(150) NOT NULL,
+    lastname VARCHAR(150) NOT NULL,
+    birth_date timestamp NOT NULL,
+    phone_number INT(11) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    transit_license VARCHAR(150) NOT NULL,
+    start_date timestamp NOT NULL,
+    end_date timestamp NOT NULL,
+    deposit_slip VARCHAR(150) NOT NULL,
+    price INT(20) NOT NULL,
+    estado VARCHAR(150) NOT NULL
 );
 
 ALTER TABLE rentados 
