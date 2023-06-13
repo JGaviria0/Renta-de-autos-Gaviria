@@ -174,18 +174,24 @@ router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
 })
 
 router.get('/gestionarReservasAdmin', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados')
+    const renta = await pool.query("SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id")
     res.render('links/gestionarReservasAdmin', {rentas: renta})
 })
 
 router.get('/gestionarReservasCustomer', isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados')
+    const renta = await pool.query("SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE d.id_user = ?", [req.user.id])
+    console.log(renta);
     res.render('links/gestionarReservasCustomer',{rentas: renta})
+})
+
+router.get('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    res.render('links/pagarDeposito', {id: id})
 })
 
 router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
-    const { deposit_slip, start_date, price } = req.body;
+    const { deposit_slip, payment_date, price } = req.body;
     const newPayment = {
         deposit_slip,
         payment_date,
@@ -193,7 +199,7 @@ router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
     }
     await pool.query('UPDATE rentados set ? WHERE id = ?', [newPayment, id] )
     req.flash('success', 'El depósito fue pagado exitosamente.')
-    res.redirect('/gestionarReservasCustomer')
+    res.redirect('/links/gestionarReservasCustomer')
 })
 
 router.get('/verRentas', isLoggedIn, async(req, res) => {
