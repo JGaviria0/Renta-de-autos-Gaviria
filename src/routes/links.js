@@ -74,9 +74,9 @@ router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
     res.redirect('/gestionarReservasCustomer')
 })
 
-router.get('/verHistorialReservas', isLoggedIn, async(req, res) => {
+router.get('/verRentas', isLoggedIn, async(req, res) => {
     const renta = await pool.query('SELECT * FROM rentados')
-    res.render('links/verHistorialReservas',{rentas: renta})
+    res.render('links/verRentas',{rentas: renta})
 })
 
 router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
