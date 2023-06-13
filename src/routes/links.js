@@ -79,6 +79,11 @@ router.get('/verRentas', isLoggedIn, async(req, res) => {
     res.render('links/verRentas',{rentas: renta})
 })
 
+router.get('/gestionarRentas', isSuperRoot, isLoggedIn, async(req, res) => {
+    const renta = await pool.query('SELECT * FROM rentados')
+    res.render('links/gestionarRentas',{rentas: renta})
+})
+
 router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
     const user = await pool.query('SELECT * FROM users WHERE id = ?', [id])

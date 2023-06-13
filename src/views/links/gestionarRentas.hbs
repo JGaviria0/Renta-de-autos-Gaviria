@@ -1,0 +1,41 @@
+<div class="container p-5">
+  <div class="mx-auto text-center">
+    <h2 class="text-primary">Gestionar rentas</h1>
+  </div>
+  <div class="p-5">
+    <table class="table table-striped mx-auto">
+      {{#if rentados}}
+      <thead class="thead-dark text-center">
+        <tr>
+          <th> Cliente </th>
+          <th> Vehículo </th>
+          <th> Fecha inicio </th>
+          <th> Fecha fin </th>
+          <th> Monto </th>
+          <th> Acción </th>
+        </tr>
+      </thead>
+      {{/if}}
+      {{#each rentados}}
+      <tbody class="text-center">
+        <tr>
+          <td>{{id_user}}</td>
+          <td>{{id_car}}</td>
+          <td>{{start_date}}</td>
+          <td>{{end_date}}</td>
+          <td>{{price}}</td>
+          <td>
+            <a href="" class="btn btn-primary"> Factura </a>
+          </td>
+        </tr>
+      </tbody>
+      {{else}}
+      <div class="col-md-4 mx-auto">
+        <div class="card card-body text-center">
+          <p>No hay rentas realizadas</p>
+        </div>
+      </div>
+      {{/each}}
+    </table>
+  </div>
+</div>
