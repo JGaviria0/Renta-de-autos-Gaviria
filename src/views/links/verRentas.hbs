@@ -1,6 +1,6 @@
 <div class="container p-5">
   <div class="mx-auto text-center">
-    <h2 class="text-primary">Mis reservas</h1>
+    <h2 class="text-primary">Mis rentas</h1>
   </div>
   <div class="p-5">
     <table class="table table-striped mx-auto">
@@ -10,7 +10,7 @@
           <th> Vehículo </th>
           <th> Fecha inicio </th>
           <th> Fecha fin </th>
-          <th> Acción </th>
+          <th> Monto </th>
         </tr>
       </thead>
       {{/if}}
@@ -20,15 +20,13 @@
           <td>{{id_car}}</td>
           <td>{{start_date}}</td>
           <td>{{end_date}}</td>
-          <td>
-            <a href="/links/pagarDeposito/{{id}}" class="btn btn-primary"> Pagar depósito </a>
-          </td>
+          <td>{{price}}</td>
         </tr>
       </tbody>
       {{else}}
       <div class="col-md-4 mx-auto">
         <div class="card card-body text-center">
-          <p>No hay reservas realizadas</p>
+          <p>No hay rentas realizadas</p>
         </div>
       </div>
       {{/each}}
