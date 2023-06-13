@@ -16,4 +16,8 @@ helpers.matchPassword = async (password, savedPassword) => {
   }
 }; 
 
+helpers.json = function(context) {
+  return JSON.stringify(context);
+}
+
 module.exports = helpers;
