@@ -27,8 +27,10 @@ router.get('/reservarAdmin/:id', isSuperRoot, isLoggedIn, async(req, res) => {
 
 router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
     const reservado = 'Reservado'
+    
     const { id } = req.params
-    const { 
+    const car = await pool.query('SELECT * FROM links WHERE id = ?', [id])
+    const {
         document_type,
         firstname,
         birth_date,
@@ -41,6 +43,11 @@ router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
         end_date
     } = req.body
 
+    const firstDate = new Date(start_date);
+    const lastDate = new Date(end_date);
+
+    const days = lastDate.getTime() - firstDate.getTime() 
+    const totalPrice = Math.round(days/ (1000*60*60*24)) * car[0].price; 
 
     const newLink = { 
         id_car: id,
@@ -54,33 +61,12 @@ router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
         phone_number,
         transit_license,
         end_date, 
-        estado: reservado
+        estado: reservado,
+        price: totalPrice
     }
-    const naturaleza = "Ingreso";
-    // const valor = precio
-    // const ingresoNuevo = {
-    //     id_car: id,
-    //     ingreso: firstname,
-    //     valor: 
-    // }
     
-    // await pool.query('UPDATE links SET estado = ? WHERE id = ?', [Rentado, id] )
+    
     await pool.query('INSERT INTO rentados set ?', [newLink] )
-    // await pool.query('INSERT INTO ingresos set ?', [ingresoNuevo] )
-    // const links = await pool.query('SELECT id_ingreso FROM ingresos ORDER BY ID DESC LIMIT 1 ')
-    // const id_ingreso = links[0].id_ingreso
-    // const nuevoRegistro = { 
-    //     id,
-    //     nombre,
-    //     cc,
-    //     telefono,
-    //     fechaInicio,
-    //     fechaFin,
-    //     precio,
-    //     id_ingreso
-    // }
-    // await pool.query('INSERT INTO historial set ?', [nuevoRegistro] )
-
     req.flash('success', 'Rentado correctamente')
     res.redirect('/links/rentados')
 })

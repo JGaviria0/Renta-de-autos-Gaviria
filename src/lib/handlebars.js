@@ -23,8 +23,7 @@ helpers.timeago2 = (timestamp) => {
 }
 
 helpers.timeago3 = (timestamp) => {
-    var date = timestamp
-
+    var date = new Date (timestamp)
     var day = date.getDate()
     var month = date.getMonth() + 1
     var year = date.getFullYear()
