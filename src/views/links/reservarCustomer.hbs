@@ -10,7 +10,7 @@
         <h6>{{links.plate}}</h6>
       </div>
       <div class="card-body">
-        <form action="/" method="POST">
+        <form action="/links/reservarCustomer/{{links.id}}" method="POST">
           <div class="form-group">
             <label class="form-label">Licencia de conducción <span class="text-danger"> *</span></label>
             <input type="number" name="transit_license" class="form-control" required>

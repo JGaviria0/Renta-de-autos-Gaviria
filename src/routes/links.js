@@ -7,7 +7,18 @@ const { isLoggedIn, isSuperRoot, isNotLoggedIn } = require('../lib/auth');
 router.get('/reservarAdmin/:id', isSuperRoot, isLoggedIn, async(req, res) => {
     const { id } = req.params
     const link = await pool.query('SELECT * FROM links WHERE id = ?', [id] )
-    const datesDisabled = ['27-06-2023', '28-06-2023', '01-06-2023'];
+    const busydays = await pool.query('SELECT * FROM rentados WHERE id_car = ?', [id])
+    let datesDisabled = []
+    busydays.forEach(element => {
+        const init = new Date(element.start_date);
+        const end = new Date(element.end_date);
+        const day = 1000 * 60 * 60 * 24;
+        for (let i = init; i <= end; i = new Date(i.getTime() + day)) {
+            datesDisabled.push(`${i.getFullYear()}-${i.getMonth()+1}-${i.getDate()}`);
+        }
+    });
+    console.log(datesDisabled);
+    // const datesDisabled = ['2023-06-27', '2023-06-28', '2023-06-01'];
     const datepickerScript = `
         <script>
         $(document).ready(function(){
@@ -74,7 +85,17 @@ router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
 router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
     const link = await pool.query('SELECT * FROM links WHERE id = ?', [id] )
-    const datesDisabled = ['27-06-2023', '28-06-2023', '01-06-2023'];
+    const busydays = await pool.query('SELECT * FROM rentados WHERE id_car = ?', [id])
+    let datesDisabled = []
+    busydays.forEach(element => {
+        const init = new Date(element.start_date);
+        const end = new Date(element.end_date);
+        const day = 1000 * 60 * 60 * 24;
+        for (let i = init; i <= end; i = new Date(i.getTime() + day)) {
+            datesDisabled.push(`${i.getFullYear()}-${i.getMonth()+1}-${i.getDate()}`);
+        }
+    });
+    console.log(datesDisabled);
     const datepickerScript = `
         <script>
         $(document).ready(function(){
@@ -90,6 +111,61 @@ router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
         </script>
     `;
     res.render('links/reservarCustomer',{links: link[0], datepickerScript})
+})
+
+router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
+    const reservado = 'Reservado'
+    
+    const { id } = req.params
+    const car = await pool.query('SELECT * FROM links WHERE id = ?', [id])
+    const {
+        start_date,
+        transit_license,
+        end_date
+    } = req.body
+
+    const id_user = req.user.id;
+
+    const firstDate = new Date(start_date);
+    const lastDate = new Date(end_date);
+
+    const days = lastDate.getTime() - firstDate.getTime() 
+    const totalPrice = Math.round(days/ (1000*60*60*24)) * car[0].price; 
+
+    const value = await pool.query('SELECT * FROM users WHERE id = ?', [id_user]);
+
+    const {
+        document_type,
+        first_name,
+        birth_date,
+        email,
+        identity_document,
+        last_name,
+        cellphone_number,
+    } = value[0]; 
+
+    console.log(value)
+
+    const newLink = { 
+        id_car: id,
+        id_user,
+        document_type,
+        firstname: first_name,
+        birth_date,
+        email,
+        start_date,
+        document_number: identity_document,
+        lastname: last_name,
+        phone_number: cellphone_number,
+        transit_license,
+        end_date, 
+        estado: reservado,
+        price: totalPrice
+    }
+    
+    await pool.query('INSERT INTO rentados set ?', [newLink] )
+    req.flash('success', 'Rentado correctamente')
+    res.redirect('/links/rentados')
 })
 
 router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
