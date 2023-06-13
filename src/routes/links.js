@@ -7,7 +7,22 @@ const { isLoggedIn, isSuperRoot, isNotLoggedIn } = require('../lib/auth');
 router.get('/reservarAdmin/:id', isSuperRoot, isLoggedIn, async(req, res) => {
     const { id } = req.params
     const link = await pool.query('SELECT * FROM links WHERE id = ?', [id] )
-    res.render('links/reservarAdmin',{links: link[0]})
+    const datesDisabled = ['27-06-2023', '28-06-2023', '01-06-2023'];
+    const datepickerScript = `
+        <script>
+        $(document).ready(function(){
+            $("#datepicker").datepicker({
+            format: 'dd-mm-yyyy',
+            datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
+            });
+            $("#datepicker2").datepicker({
+            format: 'dd-mm-yyyy',
+            datesDisabled: [${"'" + datesDisabled.join("', '") + "'"}]
+            });
+        });
+        </script>
+    `;
+    res.render('links/reservarAdmin',{links: link[0], datepickerScript})
 })
 
 router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {

@@ -6,6 +6,7 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const MySQLStore = require('express-mysql-session')
 const passport = require('passport')
+const hs = require('./lib/handlebars')
 
 const { database }  = require('./keys')
 
@@ -21,7 +22,12 @@ app.engine('.hbs', exphbs({
   layoutsDir: path.join(app.get('views'), 'layouts'),
   partialsDir: path.join(app.get('views'), 'partials'),
   extname: '.hbs',
-  helpers: require('./lib/handlebars')
+  helpers: {
+    hs,
+    json: function(context) {
+      return JSON.stringify(context);
+    }
+  }
 }))
 app.set('view engine', '.hbs');
 
