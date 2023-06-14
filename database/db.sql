@@ -51,7 +51,7 @@ CREATE TABLE links (
 -- DESCRIBE links; 
 
 CREATE TABLE rentados (
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_rent INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     id_user INT(11),
     CONSTRAINT fk_user2 FOREIGN KEY (id_user) REFERENCES users(id),
     id_car INT(11) NOT NULL,
