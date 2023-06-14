@@ -15,27 +15,27 @@
           <th> Acción </th>
         </tr>
       </thead>
-      {{/if}}
       {{#each rentados}}
       <tbody class="text-center">
         <tr>
-          <td>{{id_user}}</td>
-          <td>{{id_car}}</td>
-          <td>{{start_date}}</td>
-          <td>{{end_date}}</td>
+          <td>{{firstname}} {{lastname}}</td>
+          <td>{{plate}}</td>
+          <td>{{timeago2 start_date}}</td>
+          <td>{{timeago2 end_date}}</td>
           <td>{{price}}</td>
           <td>
-            <a href="/link/factura" class="btn btn-primary"> Factura </a>
+            <a href="/links/factura/{{id}}" class="btn btn-primary"> Factura </a>
           </td>
         </tr>
       </tbody>
+      {{/each}}
       {{else}}
       <div class="col-md-4 mx-auto">
         <div class="card card-body text-center">
           <p>No hay rentas realizadas</p>
         </div>
       </div>
-      {{/each}}
+      {{/if}}
     </table>
   </div>
 </div>

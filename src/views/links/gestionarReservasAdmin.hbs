@@ -19,11 +19,19 @@
         <tr>
           <td>{{firstname}} {{lastname}}</td>
           <td>{{brand}} {{model}}</td>
+          <td>{{status}}</td>
           <td>{{deposit_slip}}</td>
-          <td>{{state}}</td>
           <td>
-            <a href="" class="btn btn-primary"> Comprobar </a>
+            {{#if reservado}}
+            <a href="/links/comprobar/{{id}}" class="btn btn-primary"> Comprobar </a>
+            {{else}}
+            <a href="" class="btn btn-primary disabled"> Comprobar </a>
+            {{/if}}
+            {{#if comprobado}}
             <a href="/links/rentar/{{id}}" class="btn btn-secondary"> Rentar </a>
+            {{else}}
+            <a href="" class="btn btn-secondary disabled"> Rentar </a>
+            {{/if}}
             <a href="" class="btn btn-danger"> Cancelar </a>
           </td>
         </tr>
