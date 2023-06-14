@@ -238,6 +238,11 @@ router.get('/factura/:id', isSuperRoot, isLoggedIn, async(req, res) => {
     res.render('links/factura', {rentas: renta})
 })
 
+router.get('/historialRentas', isSuperRoot, isLoggedIn, async(req, res) => {
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status="finalizado" or d.status="cancelado"')
+    res.render('links/historialRentas', {rentas: renta})
+})
+
 router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
     const user = await pool.query('SELECT * FROM users WHERE id = ?', [id])
