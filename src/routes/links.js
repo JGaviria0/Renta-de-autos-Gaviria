@@ -56,8 +56,9 @@ router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
     const firstDate = new Date(start_date);
     const lastDate = new Date(end_date);
 
-    const days = lastDate.getTime() - firstDate.getTime() 
-    const totalPrice = Math.round(days/ (1000*60*60*24)) * car[0].price; 
+    const days = lastDate.getTime() - firstDate.getTime() + 1;
+    const totalPrice = (Math.round(days/ (1000*60*60*24))+1) * car[0].price;
+    console.log((Math.round(days/ (1000*60*60*24))+1), totalPrice) 
     const today = new Date(Date.now);
     const newLink = { 
         id_car: id,
@@ -72,11 +73,10 @@ router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
         transit_license,
         end_date, 
         status: reservado,
-        price: totalPrice,
+        totalprice: totalPrice,
         deposit_slip: "Reserva por Admin",
         payment_date: today
     }
-    
     
     await pool.query('INSERT INTO rentados set ?', [newLink] )
     req.flash('success', 'Reservado correctamente')
@@ -130,9 +130,9 @@ router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
     const firstDate = new Date(start_date);
     const lastDate = new Date(end_date);
 
-    const days = lastDate.getTime() - firstDate.getTime() 
-    const totalPrice = Math.round(days/ (1000*60*60*24)) * car[0].price; 
-
+    const days = lastDate.getTime() - firstDate.getTime()
+    const totalPrice = (Math.round(days/ (1000*60*60*24))+1) * car[0].price; 
+    console.log((Math.round(days/ (1000*60*60*24))+1), totalPrice)
     const value = await pool.query('SELECT * FROM users WHERE id = ?', [id_user]);
 
     const {
@@ -159,7 +159,7 @@ router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
         transit_license,
         end_date, 
         status: reservado,
-        price: totalPrice
+        totalprice: totalPrice
     }
     
     await pool.query('INSERT INTO rentados set ?', [newLink] )
@@ -200,6 +200,7 @@ router.get('/gestionarReservasCustomer', isLoggedIn, async(req, res) => {
 router.get('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
     const renta = await pool.query("SELECT * FROM rentados WHERE id_rent = ?", [id])
+    renta[0].value = renta[0].totalprice*0.3;
     res.render('links/pagarDeposito', {id_rent: id, renta: renta[0]})
 })
 
@@ -209,7 +210,7 @@ router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
     const newPayment = {
         deposit_slip,
         payment_date,
-        price
+        deposit: price
     }
     await pool.query('UPDATE rentados set ? WHERE id_rent = ?', [newPayment, id] )
     req.flash('success', 'El depósito fue pagado exitosamente.')
@@ -235,7 +236,7 @@ router.get('/factura/:id_rent', isSuperRoot, isLoggedIn, async(req, res) => {
 })
 
 router.get('/historialRentas', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status = "Finalizado" or d.status = "Cancelado"')
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status = "Finalizado" or d.status = "Cancelado" order by d.status desc')
     res.render('links/historialRentas', {rentas: renta})
 })
 
@@ -370,7 +371,8 @@ router.get('/rentados', isLoggedIn, async(req,res) => {
 router.get('/rentar/:id', isLoggedIn, async(req,res) => { 
     const { id } = req.params 
     await pool.query('UPDATE rentados SET status = "Rentado" WHERE id_rent = ?', [id]);
-    const rent = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.id_rent = ?', [id]);
+    const rent = await pool.query('SELECT * FROM  links e INNER JOIN rentados d ON d.id_car = e.id WHERE d.id_rent = ?', [id]);
+    console.log(rent)
     const nuevoRegistro = { 
         id: rent[0].id_car,
         nombre: `${rent[0].firstname} ${rent[0].lastname}`,
@@ -378,7 +380,7 @@ router.get('/rentar/:id', isLoggedIn, async(req,res) => {
         telefono: rent[0].phone_number,
         fechaInicio: rent[0].start_date,
         fechaFin: rent[0].end_date,
-        precio: rent[0].price,
+        precio: rent[0].totalprice,
         id_ingreso: 0
     }
     await pool.query('INSERT INTO historial set ?', [nuevoRegistro] )
