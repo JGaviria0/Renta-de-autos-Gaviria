@@ -8,10 +8,17 @@
         <div class="card-body">
           <form action="/signup" method="POST">
             <div class="row">
+              <div class="text-left px-3">
+                <div class="form-group">
+                  <label class="form-label">Licencia de conducción </label>
+                  <input type="text" name="transit_license" class="form-control" autofocus>
+                  <p class="text-danger">Solo aplica si te vas a registrar como cliente</p>
+                </div>
+              </div>
               <div class="text-left col-md-6">
                 <div class="form-group">
                   <label class="form-label">Tipo de documento <span class="text-danger"> *</span></label>
-                  <select class="form-control" name="document_type" autofocus>
+                  <select class="form-control" name="document_type">
                     <option></option>
                     <option name="document_type" value="Cedula de ciudadania">Cédula de ciudadania</option>
                     <option name="document_type" value="Cedula de extranjeria">Cédula de extranjería</option>

@@ -5,24 +5,21 @@
     <br>
     <div class="row">
         <div class="col-md-4 mx-auto">
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-body">
                     <form action="/links/detalles">
                         <h6 class="text-center text-dark">Datos del vehículo</h6>
                         <div class="form-group">
+                            <label class="text-dark">Marca</label>
+                            <input type="text" value="{{link2.brand}}" name="brand" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-dark">Modelo</label>
+                            <input type="url" value="{{link2.model}} " name="model" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
                             <label class="text-dark">Placa</label>
-                            <input type="text" value="{{link2.title}}" class="form-control" name="title"
-                                placeholder="Title" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-dark">URL</label>
-                            <input type="url" value="{{link2.url}} " name="url" class="form-control" placeholder="URL"
-                                readonly>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-dark">Descripción</label>
-                            <textarea name="description" rows="2" class="form-control" placeholder="Descripcion"
-                                readonly>{{link2.description}}</textarea>
+                            <input type="url" value="{{link2.plate}} " name="plate" class="form-control" readonly>
                         </div>
 
                         <div class="dropdown-divider"></div>
@@ -48,12 +45,12 @@
 
                         <h6 class="text-center text-dark">Datos del ingreso</h6>
                         <div class="form-group">
-                            <label class="text-dark">Fecha de inicio</label>
+                            <label class="text-dark">Fecha inicio</label>
                             <input type="date" value="{{timeago2 link.fechaInicio}}" name="fechaFin"
                                 class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <label class="text-dark">Fecha de fin</label>
+                            <label class="text-dark">Fecha fin</label>
                             <input type="date" value="{{timeago2 link.fechaFin}}" name="fechaFin" class="form-control"
                                 readonly>
                         </div>
