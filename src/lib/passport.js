@@ -22,7 +22,7 @@ passport.use('local.signin', new LocalStrategy({
     }
 
     if(user.desable == 'True'){
-      return done(null, false, req.flash('message', 'Usuario desabilitado o eliminado.'));
+      return done(null, false, req.flash('message', 'Usuario deshabilitado o eliminado.'));
     }
     if (user.user_type == 'propietario'){
       user.isowner = true; 
@@ -51,7 +51,7 @@ passport.use('local.signup', new LocalStrategy({
 
 
   if (rows.length <= 0) {
-    const { document_type, first_name, last_name, email, identity_document, cellphone_number, user_type, birth_date } = req.body;
+    const { document_type, first_name, last_name, email, identity_document, cellphone_number, user_type, birth_date, transit_license } = req.body;
     const birthDate = new Date(birth_date);
     const today = new Date(Date.now());
     const diff = today.getTime() - birthDate.getTime();
@@ -68,7 +68,8 @@ passport.use('local.signup', new LocalStrategy({
       user_type,
       birth_date,
       username,
-      password
+      password,
+      transit_license
     }
     newUser.password = await helpers.encryptPassword(password);
     // Saving in the Database
