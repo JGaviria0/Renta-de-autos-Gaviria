@@ -22,7 +22,8 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label">Fecha de nacimiento <span class="text-danger"> *</span></label>
-                  <input type="date" name="birth_date" class="form-control" value={{users.birth_date}} readonly>
+                  <input type="date" name="birth_date" class="form-control" value={{timeago2 users.birth_date}}
+                    readonly>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Correo electrónico <span class="text-danger"> *</span></label>
@@ -31,6 +32,11 @@
                 <div class="form-group">
                   <label class="form-label">Usuario <span class="text-danger"> *</span></label>
                   <input type="text" name="username" class="form-control" value={{users.username}} required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Licencia conducción <span class="text-danger"> *</span></label>
+                  <input type="text" name="transit_license" class="form-control" value={{users.transit_license}}
+                    readonly>
                 </div>
               </div>
               <div class="text-left col-md-6">

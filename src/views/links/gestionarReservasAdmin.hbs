@@ -1,6 +1,6 @@
 <div class="container p-5">
   <div class="mx-auto text-center">
-    <h2 class="text-primary">Gestionar reservas</h1>
+    <h2 class="text-primary">Gestionar Reservas</h1>
   </div>
   <div class="p-5">
     <table class="table table-striped mx-auto">
@@ -11,6 +11,8 @@
           <th> Vehículo </th>
           <th> Estado </th>
           <th> N° Comprobante </th>
+          <th> Depósito </th>
+          <th> Monto </th>
           <th> Acción </th>
         </tr>
       </thead>
@@ -18,9 +20,11 @@
       <tbody class="text-center">
         <tr>
           <td>{{firstname}} {{lastname}}</td>
-          <td>{{brand}} {{model}}</td>
+          <td>{{plate}}</td>
           <td>{{status}}</td>
           <td>{{deposit_slip}}</td>
+          <td>${{deposit}}</td>
+          <td>${{totalprice}}</td>
           <td>
             {{#if reservado}}
             <a href="/links/comprobar/{{id_rent}}" class="btn btn-primary"> Comprobar </a>
@@ -33,7 +37,7 @@
             <a href="" class="btn btn-secondary disabled"> Rentar </a>
             {{/if}}
             <a href="/links/cancelar/{{id_rent}}" class="btn btn-danger"> Cancelar </a>
-          </td>
+          </td>
         </tr>
       </tbody>
       {{/each}}
