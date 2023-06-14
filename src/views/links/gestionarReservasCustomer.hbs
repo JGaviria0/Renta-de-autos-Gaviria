@@ -11,6 +11,7 @@
           <th> Fecha inicio </th>
           <th> Fecha fin </th>
           <th> Estado </th>
+          <th> Monto </th>
           <th> Acciones </th>
         </tr>
       </thead>
@@ -21,6 +22,7 @@
           <td>{{timeago2 start_date}}</td>
           <td>{{timeago2 end_date}}</td>
           <td>{{status}}</td>
+          <td>${{totalprice}}</td>
           <td>
             {{#if reservado}}
             <a href="/links/pagarDeposito/{{id_rent}}" class="btn btn-primary"> Pagar depósito </a>

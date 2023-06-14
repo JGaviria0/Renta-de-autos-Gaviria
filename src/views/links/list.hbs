@@ -1,6 +1,6 @@
 <div class="container p-4">
     <div class="col-md-6 mx-auto">
-        <h1 class="mx-auto p-2 text-center text-primary"> Vehículos </h1>
+        <h2 class="mx-auto p-2 text-center text-primary"> Vehículos </h2>
     </div>
     <div class="row">
         {{#each links}}
@@ -12,10 +12,6 @@
                     <h5 class="m-2 text-dark"> {{plate}}</h5>
                     <h6 class="m-2 text-dark"> {{price}} por día</h6>
 
-                    {{!-- <p>{{timeago created_at}}</p> --}}
-
-                    {{!-- <a href="/links/formularioRenta/{{id}}" class="btn btn-danger m-1"> Rentar </a>
-                    <a href="/links/edit/{{id}}" class="btn btn-secondary m-1">Edit</a> --}}
                     <a href="/links/ingresosCarro/{{id}}" class="btn btn-primary m-2">Utilidades</a>
                     <a href="/links/reservarAdmin/{{id}}" class="btn btn-secondary m-2">Reservar</a>
 

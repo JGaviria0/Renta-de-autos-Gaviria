@@ -11,7 +11,7 @@
         <div class="card-body">
           <div class="p-1 text-dark">
             <h5 class="text-center"> Factura No. {{rentas.id_rent}}</h5>
-            <h6> <b>Fecha:</b> {{timeago2 rentas.today}} </h6>
+            <h6> <b>Fecha:</b> {{timeago2 rentas.start_date}} </h6>
             <h6> <b>Cliente:</b> {{rentas.firstname}} {{rentas.lastname}}</h6>
             <h6> <b>Identificación:</b> {{rentas.document_number}}</h6>
           </div>
@@ -52,9 +52,12 @@
 
           <div class="text-center text-secondary p-1">
             <h6>Elaborada por: Renta de Autos Gaviria</h6>
-            <h6>www.rentadeautosgaviria.com</h6>
+            <h6>www.renta-de-autos-gaviria.onrender.com</h6>
           </div>
         </div>
+      </div>
+      <div class="text-center p-4">
+        <button class="btn btn-primary"> Descargar factura en PDF </button>
       </div>
     </div>
   </div>
