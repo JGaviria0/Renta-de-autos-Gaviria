@@ -22,8 +22,18 @@
           <td>{{timeago2 end_date}}</td>
           <td>{{status}}</td>
           <td>
+            {{#if reservado}}
             <a href="/links/pagarDeposito/{{id_rent}}" class="btn btn-primary"> Pagar depósito </a>
             <a href="/links/cancelarCustomer/{{id_rent}}" class="btn btn-danger"> Cancelar </a>
+            {{else}}
+            {{#if pendiente}}
+            <a href="" class="btn btn-primary disabled"> Pagar depósito </a>
+            <a href="/links/cancelarCustomer/{{id_rent}}" class="btn btn-danger"> Cancelar </a>
+            {{else}}
+            <a href="" class="btn btn-primary disabled"> Pagar depósito </a>
+            <a href="" class="btn btn-danger disabled"> Cancelar </a>
+            {{/if}}
+            {{/if}}
           </td>
         </tr>
       </tbody>

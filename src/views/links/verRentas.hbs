@@ -1,26 +1,28 @@
 <div class="container p-5">
   <div class="mx-auto text-center">
-    <h2 class="text-primary">Mis rentas</h1>
+    <h2 class="text-primary">Mis Rentas</h1>
   </div>
   <div class="p-5">
     <table class="table table-striped mx-auto">
-      {{#if rentados}}
+      {{#if rentas}}
       <thead class="thead-dark text-center">
         <tr>
           <th> Vehículo </th>
           <th> Fecha inicio </th>
           <th> Fecha fin </th>
           <th> Monto </th>
+          <th> Estado </th>
         </tr>
       </thead>
       {{/if}}
-      {{#each rentados}}
+      {{#each rentas}}
       <tbody class="text-center">
         <tr>
-          <td>{{id_car}}</td>
-          <td>{{start_date}}</td>
-          <td>{{end_date}}</td>
+          <td>{{brand}} {{model}}</td>
+          <td>{{timeago2 start_date}}</td>
+          <td>{{timeago2 end_date}}</td>
           <td>{{price}}</td>
+          <td>{{status}}</td>
         </tr>
       </tbody>
       {{else}}
