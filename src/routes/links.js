@@ -18,8 +18,6 @@ router.get('/reservarAdmin/:id', isSuperRoot, isLoggedIn, async(req, res) => {
             datesDisabled.push(`${i.getFullYear()}-${i.getMonth()+1}-${i.getDate()}`);
         }
     });
-    console.log(datesDisabled);
-    // const datesDisabled = ['2023-06-27', '2023-06-28', '2023-06-01'];
     const datepickerScript = `
         <script>
         $(document).ready(function(){
@@ -168,7 +166,7 @@ router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
     
     await pool.query('INSERT INTO rentados set ?', [newLink] )
     req.flash('success', 'Rentado correctamente')
-    res.redirect('/links/rentados')
+    res.redirect('/links/gestionarReservasCustomer')
 })
 
 router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
@@ -216,7 +214,7 @@ router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
         payment_date,
         price
     }
-    await pool.query('UPDATE rentados set ? WHERE id = ?', [newPayment, id] )
+    await pool.query('UPDATE rentados set ? WHERE id_rent = ?', [newPayment, id] )
     req.flash('success', 'El depósito fue pagado exitosamente.')
     res.redirect('/links/gestionarReservasCustomer')
 })
@@ -227,7 +225,7 @@ router.get('/verRentas', isLoggedIn, async(req, res) => {
 })
 
 router.get('/generarFactura/', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE d.status = "Rentado" or d.status = "Cancelado"')
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE status = "Rentado" and status = "Finalizado"')
     console.log(renta)
     res.render('links/generarFactura', {rentados: renta})
 })
@@ -384,6 +382,12 @@ router.get('/cancelar/:id', isLoggedIn, async(req,res) => {
     const { id } = req.params 
     await pool.query('UPDATE rentados SET status = "Cancelado" WHERE id_rent = ?', [id]);
     res.redirect('/links/gestionarReservasAdmin')
+})  
+
+router.get('/cancelarCustomer/:id', isLoggedIn, async(req,res) => { 
+    const { id } = req.params 
+    await pool.query('UPDATE rentados SET status = "Cancelado" WHERE id_rent = ?', [id]);
+    res.redirect('/links/gestionarReservasCustomer')
 })  
 
 router.get('/finalizar/:id', isLoggedIn, async(req,res) => { 
