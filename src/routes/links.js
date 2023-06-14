@@ -86,7 +86,7 @@ router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
 router.get('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
     const link = await pool.query('SELECT * FROM links WHERE id = ?', [id] )
-    const busydays = await pool.query('SELECT * FROM rentados WHERE id_car = ?', [id])
+    const busydays = await pool.query('SELECT * FROM rentados WHERE id_car = ? and status != "Cancelado"', [id])
     let datesDisabled = []
     busydays.forEach(element => {
         const init = new Date(element.start_date);
