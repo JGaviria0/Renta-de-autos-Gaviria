@@ -227,19 +227,21 @@ router.get('/verRentas', isLoggedIn, async(req, res) => {
 })
 
 router.get('/generarFactura/', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE status = "Rentado"')
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE d.status = "Rentado" or d.status = "Cancelado"')
     console.log(renta)
     res.render('links/generarFactura', {rentados: renta})
 })
 
-router.get('/factura/:id', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados')
-    renta.today = Date.now();
-    res.render('links/factura', {rentas: renta})
+router.get('/factura/:id_rent', isSuperRoot, isLoggedIn, async(req, res) => {
+    const { id_rent } = req.params
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.id_rent = ?',[id_rent])
+    renta.today = new Date (Date.now());
+
+    res.render('links/factura', {rentas: renta[0]})
 })
 
 router.get('/historialRentas', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status="finalizado" or d.status="cancelado"')
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status = "Finalizado" or d.status = "Cancelado"')
     res.render('links/historialRentas', {rentas: renta})
 })
 
