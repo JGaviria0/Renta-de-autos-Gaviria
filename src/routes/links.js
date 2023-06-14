@@ -145,8 +145,6 @@ router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
         cellphone_number,
     } = value[0]; 
 
-    console.log(value)
-
     const newLink = { 
         id_car: id,
         id_user,
@@ -183,7 +181,6 @@ router.get('/gestionarReservasAdmin', isSuperRoot, isLoggedIn, async(req, res) =
         if(element.status == "Rentado") element.rentado = true;
         if(element.status == "Finalizado") element.finalizado = true;
     });
-    console.log(renta)
     res.render('links/gestionarReservasAdmin', {rentas: renta})
 })
 
@@ -226,7 +223,6 @@ router.get('/verRentas', isLoggedIn, async(req, res) => {
 
 router.get('/generarFactura/', isSuperRoot, isLoggedIn, async(req, res) => {
     const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE d.status = "Rentado" or d.status = "Finalizado"')
-    console.log(renta)
     res.render('links/generarFactura', {rentados: renta})
 })
 
@@ -281,7 +277,6 @@ router.get('/add', isLoggedIn, (req, res) => {
 })
 
 router.post('/add', isLoggedIn, async (req, res) => {
-    console.log(req.user.id);
     const { brand,
         plate,
         gearbox,
@@ -368,13 +363,27 @@ router.get('/', isLoggedIn, async(req,res) => {
 router.get('/rentados', isLoggedIn, async(req,res) => { 
     const Disponible = 'Rentado'
     const links = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status = "Rentado"')
-    console.log(links)
+
     res.render('links/rentados', { links: links })
 })
 
 router.get('/rentar/:id', isLoggedIn, async(req,res) => { 
     const { id } = req.params 
     await pool.query('UPDATE rentados SET status = "Rentado" WHERE id_rent = ?', [id]);
+    const rent = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.id_rent = ?', [id]);
+    const nuevoRegistro = { 
+        id: rent[0].id_car,
+        nombre: `${rent[0].firstname} ${rent[0].lastname}`,
+        cc: rent[0].document_number,
+        telefono: rent[0].phone_number,
+        fechaInicio: rent[0].start_date,
+        fechaFin: rent[0].end_date,
+        precio: rent[0].price,
+        id_ingreso: 0
+    }
+    await pool.query('INSERT INTO historial set ?', [nuevoRegistro] )
+
+    console.log(nuevoRegistro);   
     res.redirect('/links/rentados')
 })
 
@@ -455,7 +464,7 @@ router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
     const { id_gasto } = req.params
     const naturaleza = 'Gastos'
     const {ingreso, valor, fecha } = req.body
-    console.log(req.body)
+    
     const newLink = {
         ingreso,
         valor,
@@ -472,7 +481,7 @@ router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
 router.get('/rentadoPor/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params 
     const links = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.id_rent = ?', [id])
-    console.log(links)
+    
     res.render('links/rentadoPor', { link: links[0] })
 })
 
@@ -496,7 +505,6 @@ router.post('/rentadoPor/:id', isLoggedIn, async(req, res) => {
 router.get('/detalles/:id_historial', isLoggedIn, async (req, res) => {
     const { id_historial } = req.params 
     const links = await pool.query('SELECT * FROM historial WHERE id_historial = ?', [id_historial])
-    console.log(links)
     const links2 = await pool.query('SELECT * FROM links WHERE id = ?', [links[0].id])
     res.render('links/detalles', { link: links[0], link2: links2[0] })
 })
