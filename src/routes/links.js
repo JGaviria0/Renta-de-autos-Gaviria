@@ -456,7 +456,7 @@ router.post('/edit/:id', isLoggedIn, async(req, res) => {
     }
     await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id])
     req.flash('success', 'Los datos de su vehículo han sido actualizados correctamente')
-    res.redirect('/links/gestionarCarro/' + id)
+    res.redirect('/links')
 })
 
 router.get('/editGastos/:id_ingreso', isSuperRoot, async (req, res) => {
