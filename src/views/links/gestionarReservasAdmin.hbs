@@ -4,24 +4,27 @@
   </div>
   <div class="p-5">
     <table class="table table-striped mx-auto">
-      {{#if rentas}} 
+      {{#if rentas}}
       <thead class="thead-dark text-center">
         <tr>
-          <th> N° Reserva </th>
-          <th> N° Comprobante </th>
           <th> Cliente </th>
+          <th> Vehículo </th>
+          <th> Estado </th>
+          <th> N° Comprobante </th>
           <th> Acción </th>
         </tr>
       </thead>
       {{#each rentas}}
       <tbody class="text-center">
         <tr>
-          <td>{{plate}}</td>
-          <td>{{deposit_slip}}</td>
           <td>{{firstname}} {{lastname}}</td>
+          <td>{{brand}} {{model}}</td>
+          <td>{{deposit_slip}}</td>
+          <td>{{state}}</td>
           <td>
             <a href="" class="btn btn-primary"> Comprobar </a>
             <a href="/links/rentar/{{id}}" class="btn btn-secondary"> Rentar </a>
+            <a href="" class="btn btn-danger"> Cancelar </a>
           </td>
         </tr>
       </tbody>
