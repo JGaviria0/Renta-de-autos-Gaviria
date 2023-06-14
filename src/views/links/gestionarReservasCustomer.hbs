@@ -1,6 +1,6 @@
 <div class="container p-5">
   <div class="mx-auto text-center">
-    <h2 class="text-primary">Mis reservas</h1>
+    <h2 class="text-primary">Mis Reservas</h1>
   </div>
   <div class="p-5">
     <table class="table table-striped mx-auto">
@@ -10,6 +10,7 @@
           <th> Vehículo </th>
           <th> Fecha inicio </th>
           <th> Fecha fin </th>
+          <th> Estado </th>
           <th> Acciones </th>
         </tr>
       </thead>
@@ -19,9 +20,10 @@
           <td>{{brand}} {{model}}</td>
           <td>{{timeago2 start_date}}</td>
           <td>{{timeago2 end_date}}</td>
+          <td>{{status}}</td>
           <td>
             <a href="/links/pagarDeposito/{{id}}" class="btn btn-primary"> Pagar depósito </a>
-            <a href="/" class="btn btn-danger"> Cancelar </a>
+            <a href="/links/cancelar/{{id}}" class="btn btn-danger"> Cancelar </a>
           </td>
         </tr>
       </tbody>
