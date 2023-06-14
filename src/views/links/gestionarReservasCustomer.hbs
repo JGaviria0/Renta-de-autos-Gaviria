@@ -16,13 +16,12 @@
       {{#each rentas}}
       <tbody class="text-center">
         <tr>
-          <td>{{plate}}</td>
+          <td>{{brand}} {{model}}</td>
           <td>{{timeago2 start_date}}</td>
           <td>{{timeago2 end_date}}</td>
           <td>
             <a href="/links/pagarDeposito/{{id}}" class="btn btn-primary"> Pagar depósito </a>
-            <br>
-            <a href="/" class="btn btn-primary"> Cancelar </a>
+            <a href="/" class="btn btn-danger"> Cancelar </a>
           </td>
         </tr>
       </tbody>
