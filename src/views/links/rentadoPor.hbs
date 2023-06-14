@@ -11,15 +11,15 @@
                         <h6 class="text-center text-dark">Datos del vehículo</h6>
                         <div class="form-group">
                             <label class="text-dark">Marca</label>
-                            <input type="text" value="{{}}" name="brand" class="form-control" readonly>
+                            <input type="text" value="{{link.brand}}" name="brand" class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label class="text-dark">Modelo</label>
-                            <input type="text" value="{{}} " name="model" class="form-control" readonly>
+                            <input type="text" value="{{link.model}} " name="model" class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label class="text-dark">Placa</label>
-                            <input type="text" value="{{}} " name="plate" class="form-control" readonly>
+                            <input type="text" value="{{link.plate}} " name="plate" class="form-control" readonly>
                         </div>
 
                         <div class="dropdown-divider"></div>
@@ -27,15 +27,18 @@
                         <h6 class="text-center text-dark">Datos del usuario</h6>
                         <div class="form-group">
                             <label class="text-dark">Documento de identificación</label>
-                            <input type="text" value="{{}}" name="document_number" class="form-control" readonly>
+                            <input type="text" value="{{link.document_number}}" name="document_number"
+                                class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label class="text-dark">Nombre completo</label>
-                            <input type="text" value="{{}} " name="firstname" class="form-control" readonly>
+                            <input type="text" value="{{link.firstname}} {{link.lastname}}" name="firstname"
+                                class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <label class="text-dark">Nombre completo</label>
-                            <input type="number" value="{{}} " name="phone_number" class="form-control" readonly>
+                            <label class="text-dark">Número de celular</label>
+                            <input type="text" value="{{link.phone_number}} " name="phone_number" class="form-control"
+                                readonly>
                         </div>
 
                         <div class="dropdown-divider"></div>
@@ -43,15 +46,17 @@
                         <h6 class="text-center text-dark">Datos de la renta</h6>
                         <div class="form-group">
                             <label class="text-dark">Fecha inicio</label>
-                            <input type="text" value="{{}}" name="start_date" class="form-control" readonly>
+                            <input type="text" value="{{timeago2 link.start_date}}" name="start_date"
+                                class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label class="text-dark">Fecha fin</label>
-                            <input type="text" value="{{}} " name="end_date" class="form-control" readonly>
+                            <input type="text" value="{{timeago2 link.end_date}} " name="end_date" class="form-control"
+                                readonly>
                         </div>
                         <div class="form-group">
                             <label class="text-dark">Monto</label>
-                            <input type="number" value="{{}} " name="price" class="form-control" readonly>
+                            <input type="text" value="${{link.price}} " name="price" class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary btn-block">Volver</button>
