@@ -26,9 +26,15 @@
           <td>{{cellphone_number}}</td>
           <td>{{email}}</td>
           <td>{{user_type}}</td>
+          {{#if enable}}
           <td>
-            <a href="" class="btn btn-danger"> Deshabilitar </a>
+            <a href="/links/habilitarUser/{{id}}" class="btn btn-success btn-block">Habilitar</a>
           </td>
+          {{else}}
+          <td>
+            <a href="/links/deshabilitarUser/{{id}}" class="btn btn-danger btn-block">Deshabilitar</a>
+          </td>
+          {{/if}}
         </tr>
       </tbody>
 

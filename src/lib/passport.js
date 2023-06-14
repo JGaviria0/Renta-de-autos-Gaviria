@@ -20,6 +20,10 @@ passport.use('local.signin', new LocalStrategy({
       user.isroot = true; 
       user.test = 'TEst';
     }
+
+    if(user.desable == 'True'){
+      return done(null, false, req.flash('message', 'Usuario desabilitado o eliminado.'));
+    }
     if (user.user_type == 'propietario'){
       user.isowner = true; 
     }
@@ -44,8 +48,16 @@ passport.use('local.signup', new LocalStrategy({
   passReqToCallback: true
 }, async (req, username, password, done) => {
   const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+
+
   if (rows.length <= 0) {
     const { document_type, first_name, last_name, email, identity_document, cellphone_number, user_type, birth_date } = req.body;
+    const birthDate = new Date(birth_date);
+    const today = new Date(Date.now());
+    const diff = today.getTime() - birthDate.getTime();
+    if(Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25)) < 18){
+      return done(null, false, req.flash('message', 'NO es mayor de edad.'));
+    }
     let newUser = {
       document_type, 
       first_name, 
