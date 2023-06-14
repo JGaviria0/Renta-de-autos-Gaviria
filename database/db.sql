@@ -68,7 +68,7 @@ CREATE TABLE rentados (
     end_date timestamp NOT NULL,
     deposit_slip VARCHAR(150),
     price INT(20) NOT NULL,
-    estado VARCHAR(150) NOT NULL,
+    status VARCHAR(150) NOT NULL,
     payment_date timestamp
 );
 
