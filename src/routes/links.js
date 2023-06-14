@@ -169,6 +169,12 @@ router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
 
 router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
     const user = await pool.query('SELECT * FROM users')
+    user.forEach(element => {
+        if(element.desable == "True"){
+            element.enable = true; 
+        }
+    });
+    console.log(user)
     res.render('links/gestionarUsuarios',{users: user})
 })
 
@@ -629,15 +635,22 @@ router.get('/habilitarCar/:id_car', isLoggedIn, async (req, res) => {
     res.redirect('/links/gestionarCarro/' + id_car);
 })
 
-router.get('/deshabilitarUser/:id_user', isLoggedIn, async (req, res) => {
+router.get('/deshabilitarUser/:id_user', isSuperRoot, async (req, res) => {
     const { id_user } = req.params;
-    await pool.query('DELETE FROM users WHERE id = ?;', [id_user]);
-    if (req.user.username == 'root'){
-        res.redirect('links/gestionarUsuarios')
-    }
-    else{
-        res.redirect('/logout');
-    }
+    await pool.query('UPDATE users SET desable = "True" WHERE id = ?;', [id_user]);
+    res.redirect('/links/gestionarUsuarios');
+})
+
+router.get('/habilitarUser/:id_user', isSuperRoot, async (req, res) => {
+    const { id_user } = req.params;
+    await pool.query('UPDATE users SET desable = "False" WHERE id = ?;', [id_user]);
+    res.redirect('/links/gestionarUsuarios')
+})
+
+router.get('/autodeshabilitarUser', isLoggedIn, async (req, res) => {
+    const id_user = req.user.id
+    await pool.query('UPDATE users SET desable = "True" WHERE id = ?;', [id_user]);
+    res.redirect('/logout');
 })
 
 router.get('/mantenimiento/:id', isSuperRoot, async (req, res) => { 

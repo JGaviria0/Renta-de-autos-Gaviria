@@ -20,7 +20,11 @@
           <td>{{brand}} {{model}}</td>
           <td>{{timeago2 start_date}}</td>
           <td>{{timeago2 end_date}}</td>
+          {{#if reservado}}
+          <td>Pendiente</td>
+          {{else}}
           <td>{{status}}</td>
+          {{/if}}
           <td>
             {{#if reservado}}
             <a href="/links/pagarDeposito/{{id_rent}}" class="btn btn-primary"> Pagar depósito </a>
