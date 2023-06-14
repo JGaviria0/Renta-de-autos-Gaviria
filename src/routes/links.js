@@ -230,8 +230,6 @@ router.get('/generarFactura/', isSuperRoot, isLoggedIn, async(req, res) => {
 router.get('/factura/:id_rent', isSuperRoot, isLoggedIn, async(req, res) => {
     const { id_rent } = req.params
     const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.id_rent = ?',[id_rent])
-    renta.today = new Date (Date.now());
-
     res.render('links/factura', {rentas: renta[0]})
 })
 
@@ -248,13 +246,13 @@ router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
 
 router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
-    const {username, password, email, cellphone_number, birth_date} = req.body
+    const {username, password, email, cellphone_number, transit_license} = req.body
     const updateProfile = {
         username,
         password,
         email,
         cellphone_number,
-        birth_date
+        transit_license
     }
     await pool.query('UPDATE users set ? WHERE id = ?', [updateProfile, id])
     req.flash('success', 'Su perfil ha sido actualizado correctamente')
