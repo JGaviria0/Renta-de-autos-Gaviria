@@ -252,10 +252,9 @@ router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
 
 router.post('/editarPerfil/:id', isLoggedIn, async(req, res) => {
     const { id } = req.params
-    const {username, password, email, cellphone_number, transit_license} = req.body
+    const {username, email, cellphone_number, transit_license} = req.body
     const updateProfile = {
         username,
-        password,
         email,
         cellphone_number,
         transit_license
