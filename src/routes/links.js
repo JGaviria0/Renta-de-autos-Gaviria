@@ -72,7 +72,7 @@ router.post('/reservarAdmin/:id', isSuperRoot, async(req, res) => {
         phone_number,
         transit_license,
         end_date, 
-        estado: reservado,
+        starus: reservado,
         price: totalPrice
     }
     
@@ -159,7 +159,7 @@ router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
         phone_number: cellphone_number,
         transit_license,
         end_date, 
-        estado: reservado,
+        status: reservado,
         price: totalPrice
     }
     
@@ -175,18 +175,27 @@ router.get('/gestionarUsuarios', isSuperRoot, isLoggedIn, async(req, res) => {
 
 router.get('/gestionarReservasAdmin', isSuperRoot, isLoggedIn, async(req, res) => {
     const renta = await pool.query("SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id")
+    await renta.forEach(element => {
+        if(element.status == "Reservado") element.reservado = true;
+        if(element.status == "Comprobado") element.comprobado = true;
+        if(element.status == "Cancelado") element.cancelado = true;
+        if(element.status == "Rentado") element.rentado = true;
+        if(element.status == "Finalizado") element.finalizado = true;
+    });
+    console.log(renta)
     res.render('links/gestionarReservasAdmin', {rentas: renta})
 })
 
 router.get('/gestionarReservasCustomer', isLoggedIn, async(req, res) => {
     const renta = await pool.query("SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE d.id_user = ?", [req.user.id])
-    console.log(renta);
+    console.log(renta)
     res.render('links/gestionarReservasCustomer',{rentas: renta})
 })
 
 router.get('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
-    res.render('links/pagarDeposito', {id: id})
+    const renta = await pool.query("SELECT * FROM rentados WHERE id = ?", [id])
+    res.render('links/pagarDeposito', {id: id, renta: renta[0]})
 })
 
 router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
@@ -341,9 +350,29 @@ router.get('/', isLoggedIn, async(req,res) => {
 
 router.get('/rentados', isLoggedIn, async(req,res) => { 
     const Disponible = 'Rentado'
-    const links = await pool.query('SELECT * FROM rentados')
-    res.render('links/rentados', { links })
+    const links = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status = "Rentado"')
+    console.log(links)
+    res.render('links/rentados', { links: links })
 })
+
+router.get('/rentar/:id', isLoggedIn, async(req,res) => { 
+    const { id } = req.params 
+    await pool.query('UPDATE rentados SET status = "Rentado" WHERE id = ?', [id]);
+    res.redirect('/links/rentados')
+})
+
+router.get('/cancelar/:id', isLoggedIn, async(req,res) => { 
+    const { id } = req.params 
+    await pool.query('UPDATE rentados SET status = "Cancelado" WHERE id = ?', [id]);
+    res.redirect('/links/gestionarReservasAdmin')
+})  
+
+router.get('/finalizar/:id', isLoggedIn, async(req,res) => { 
+    const { id } = req.params 
+    await pool.query('UPDATE rentados SET status = "Finalizado" WHERE id = ?', [id]);
+    res.redirect('/links/gestionarReservasAdmin')
+})
+
 
 router.get('/devuelto/:id', isSuperRoot, async (req, res) => {
     const Rentado = 'Disponible'
@@ -413,7 +442,8 @@ router.post('/editGastos/:id_gasto', isSuperRoot, async(req, res) => {
 
 router.get('/rentadoPor/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params 
-    const links = await pool.query('SELECT * FROM rentados WHERE id = ?', [id])
+    const links = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.id = ?', [id])
+    console.log(links)
     res.render('links/rentadoPor', { link: links[0] })
 })
 
