@@ -1,6 +1,6 @@
 <div class="container p-5">
   <div class="mx-auto text-center">
-    <h2 class="text-primary">Gestionar reservas</h1>
+    <h2 class="text-primary">Historial de Rentas</h1>
   </div>
   <div class="p-5">
     <table class="table table-striped mx-auto">
@@ -9,9 +9,8 @@
         <tr>
           <th> Cliente </th>
           <th> Vehículo </th>
+          <th> Monto </th>
           <th> Estado </th>
-          <th> N° Comprobante </th>
-          <th> Acción </th>
         </tr>
       </thead>
       {{#each rentas}}
@@ -19,20 +18,15 @@
         <tr>
           <td>{{firstname}} {{lastname}}</td>
           <td>{{brand}} {{model}}</td>
+          <td>{{price}}</td>
           <td>{{status}}</td>
-          <td>{{deposit_slip}}</td>
-          <td>
-            <a href="" class="btn btn-primary"> Comprobar </a>
-            <a href="/links/rentar/{{id}}" class="btn btn-secondary"> Rentar </a>
-            <a href="/links/cancelar/{{id}}" class="btn btn-danger"> Cancelar </a>
-          </td>
         </tr>
       </tbody>
       {{/each}}
       {{else}}
       <div class="col-md-4 mx-auto">
         <div class="card card-body text-center">
-          <p>No hay reservas realizadas</p>
+          <p>Aún no hay rentas realizadas</p>
         </div>
       </div>
       {{/if}}

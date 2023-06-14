@@ -226,6 +226,11 @@ router.get('/factura', isSuperRoot, isLoggedIn, async(req, res) => {
     res.render('links/factura', {rentas: renta})
 })
 
+router.get('/historialRentas', isSuperRoot, isLoggedIn, async(req, res) => {
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status="finalizado" or d.status="cancelado"')
+    res.render('links/historialRentas', {rentas: renta})
+})
+
 router.get('/editarPerfil/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
     const user = await pool.query('SELECT * FROM users WHERE id = ?', [id])
@@ -374,14 +379,14 @@ router.get('/finalizar/:id', isLoggedIn, async(req,res) => {
 })
 
 
-router.get('/devuelto/:id', isSuperRoot, async (req, res) => {
-    const Rentado = 'Disponible'
-    const { id } = req.params
-    await pool.query('UPDATE links SET estado = ? WHERE id = ?', [Rentado, id])
-    await pool.query('DELETE FROM rentados WHERE id = ?', [id])
-    req.flash('success', 'Auto devuelto exitosamente')
-    res.redirect('/links')
-})
+// router.get('/devuelto/:id', isSuperRoot, async (req, res) => {
+//     const Rentado = 'Disponible'
+//     const { id } = req.params
+//     await pool.query('UPDATE links SET estado = ? WHERE id = ?', [Rentado, id])
+//     await pool.query('DELETE FROM rentados WHERE id = ?', [id])
+//     req.flash('success', 'Auto devuelto exitosamente')
+//     res.redirect('/links')
+// })
 
 
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
