@@ -121,7 +121,6 @@ router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
     const car = await pool.query('SELECT * FROM links WHERE id = ?', [id])
     const {
         start_date,
-        transit_license,
         end_date
     } = req.body
 
@@ -143,6 +142,7 @@ router.post('/reservarCustomer/:id', isLoggedIn, async(req, res) => {
         identity_document,
         last_name,
         cellphone_number,
+        transit_license
     } = value[0]; 
 
     console.log(value)
