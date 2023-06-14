@@ -23,16 +23,16 @@
           <td>{{deposit_slip}}</td>
           <td>
             {{#if reservado}}
-            <a href="/links/comprobar/{{id}}" class="btn btn-primary"> Comprobar </a>
+            <a href="/links/comprobar/{{id_rent}}" class="btn btn-primary"> Comprobar </a>
             {{else}}
             <a href="" class="btn btn-primary disabled"> Comprobar </a>
             {{/if}}
             {{#if comprobado}}
-            <a href="/links/rentar/{{id}}" class="btn btn-secondary"> Rentar </a>
+            <a href="/links/rentar/{{id_rent}}" class="btn btn-secondary"> Rentar </a>
             {{else}}
             <a href="" class="btn btn-secondary disabled"> Rentar </a>
             {{/if}}
-            <a href="/links/cancelar/{{id}}" class="btn btn-danger"> Cancelar </a>
+            <a href="/links/cancelar/{{id_rent}}" class="btn btn-danger"> Cancelar </a>
           </td>
         </tr>
       </tbody>

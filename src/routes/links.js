@@ -216,7 +216,7 @@ router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
         payment_date,
         price
     }
-    await pool.query('UPDATE rentados set ? WHERE id = ?', [newPayment, id] )
+    await pool.query('UPDATE rentados set ? WHERE id_rent = ?', [newPayment, id] )
     req.flash('success', 'El depósito fue pagado exitosamente.')
     res.redirect('/links/gestionarReservasCustomer')
 })
