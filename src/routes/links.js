@@ -200,7 +200,7 @@ router.get('/gestionarReservasCustomer', isLoggedIn, async(req, res) => {
 router.get('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params
     const renta = await pool.query("SELECT * FROM rentados WHERE id_rent = ?", [id])
-    res.render('links/pagarDeposito', {id: id, renta: renta[0]})
+    res.render('links/pagarDeposito', {id_rent: id, renta: renta[0]})
 })
 
 router.post('/pagarDeposito/:id', isLoggedIn, async (req, res) => {
@@ -222,18 +222,20 @@ router.get('/verRentas', isLoggedIn, async(req, res) => {
 })
 
 router.get('/generarFactura/', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE status = "Rentado" and status = "Finalizado"')
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id  WHERE d.status = "Rentado" or d.status = "Finalizado"')
     res.render('links/generarFactura', {rentados: renta})
 })
 
-router.get('/factura/:id', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados')
-    renta.today = Date.now();
-    res.render('links/factura', {rentas: renta})
+router.get('/factura/:id_rent', isSuperRoot, isLoggedIn, async(req, res) => {
+    const { id_rent } = req.params
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.id_rent = ?',[id_rent])
+    renta.today = new Date (Date.now());
+
+    res.render('links/factura', {rentas: renta[0]})
 })
 
 router.get('/historialRentas', isSuperRoot, isLoggedIn, async(req, res) => {
-    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status="finalizado" or d.status="cancelado"')
+    const renta = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.status = "Finalizado" or d.status = "Cancelado"')
     res.render('links/historialRentas', {rentas: renta})
 })
 

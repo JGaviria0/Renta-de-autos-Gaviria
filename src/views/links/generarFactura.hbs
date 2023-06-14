@@ -12,6 +12,7 @@
           <th> Fecha inicio </th>
           <th> Fecha fin </th>
           <th> Monto </th>
+          <th> Estado </th>
           <th> Acción </th>
         </tr>
       </thead>
@@ -19,10 +20,11 @@
       <tbody class="text-center">
         <tr>
           <td>{{firstname}} {{lastname}}</td>
-          <td>{{plate}}</td>
+          <td>{{brand}} {{model}}</td>
           <td>{{timeago2 start_date}}</td>
           <td>{{timeago2 end_date}}</td>
-          <td>{{price}}</td>
+          <td>${{price}}</td>
+          <td>{{status}}</td>
           <td>
             <a href="/links/factura/{{id_rent}}" class="btn btn-primary"> Factura </a>
           </td>

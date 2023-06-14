@@ -10,10 +10,10 @@
         </div>
         <div class="card-body">
           <div class="p-1 text-dark">
-            <h5 class="text-center"> Factura No. 001 </h5>
-            <h6> <b>Fecha:</b> 10/03/2023</h6>
-            <h6> <b>Cliente:</b> Ernesto Perez</h6>
-            <h6> <b>Identificación:</b> 24156789</h6>
+            <h5 class="text-center"> Factura No. {{rentas.id_rent}}</h5>
+            <h6> <b>Fecha:</b> {{timeago2 rentas.today}} </h6>
+            <h6> <b>Cliente:</b> {{rentas.firstname}} {{rentas.lastname}}</h6>
+            <h6> <b>Identificación:</b> {{rentas.document_number}}</h6>
           </div>
 
           <hr class="border-secondary p-1">
@@ -34,16 +34,16 @@
               </td </tr>
             <tr>
               <td>
-                <h6>Honda CR-V</h6>
+                <h6>{{rentas.brand}} {{rentas.model}}</h6>
               </td>
               <td>
-                <h6>12/06/2023</h6>
+                <h6>{{timeago2 rentas.start_date}}</h6>
               </td>
               <td>
-                <h6>14/06/2023</h6>
+                <h6>{{timeago2 rentas.end_date}}</h6>
               </td>
               <td>
-                <h6>240.000</h6>
+                <h6>${{rentas.price}}</h6>
               </td>
             </tr>
           </table>
