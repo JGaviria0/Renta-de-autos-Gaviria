@@ -367,16 +367,8 @@ router.get('/rentados', isLoggedIn, async(req,res) => {
 
 router.get('/rentar/:id', isLoggedIn, async(req,res) => { 
     const { id } = req.params 
-    // await pool.query('UPDATE rentados SET status = "Rentado" WHERE id_rent = ?', [id]);
+    await pool.query('UPDATE rentados SET status = "Rentado" WHERE id_rent = ?', [id]);
     const rent = await pool.query('SELECT * FROM rentados d INNER JOIN links e ON d.id_car = e.id WHERE d.id_rent = ?', [id]);
-    // const ingresoNuevo = {
-    //     ingreso: `${rent[0].firstname} ${rent[0].lastname}`,
-    //     fecha: rent[0].start_date,
-    //     id_car: rent[0].id_car,
-    //     valor: rent[0].price,
-    //     naturaleza: "Ingresos"
-    // }
-
     const nuevoRegistro = { 
         id: rent[0].id_car,
         nombre: `${rent[0].firstname} ${rent[0].lastname}`,
@@ -390,7 +382,6 @@ router.get('/rentar/:id', isLoggedIn, async(req,res) => {
     await pool.query('INSERT INTO historial set ?', [nuevoRegistro] )
 
     console.log(nuevoRegistro);   
-    // await pool.query('INSERT INTO ingresos set ?', [ingresoNuevo] )
     res.redirect('/links/rentados')
 })
 
